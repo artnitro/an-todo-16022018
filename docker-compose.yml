@@ -1,0 +1,123 @@
+version: '3.1'
+services:
+  an-mysql:
+    build: ./mysql
+    container_name: 'an-mysql'
+    secrets:
+      - mysqlroot
+    environment:
+      - MYSQL_DATABASE=antodo16022018
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysqlroot
+    volumes:
+      - ./mysql/db-mysql:/var/lib/mysql
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-mongo:
+    build: ./mongo
+    container_name: 'an-mongo'
+    volumes:
+      - ./mongo/db-mongo:/data/db
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-redis:
+    build: ./redis
+    container_name: 'an-redis'
+    secrets:
+      - redisuser
+    environment: 
+      - REDIS_PASS_FILE=/run/secrets/redisuser
+    volumes:
+      - ./redis/db-redis:/data
+    command: ["sh", "-c", "exec redis-server /etc/redis/redis.conf --requirepass \"$$(cat $$REDIS_PASS_FILE)\""]
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-api:
+    build: ./api
+    container_name: 'an-api'
+    volumes:
+      - ./api:/api
+      - /api/node_modules
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-oauth:
+    build: ./oauth
+    container_name: 'an-oauth'
+    volumes: 
+      - ./oauth:/oauth
+      - /oauth/node_modules
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-cdn:
+    build: ./cdn
+    container_name: 'an-cdn'
+    volumes: 
+      - ./cdn:/cdn
+      - /cdn/node_modules
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-public:
+    build: ./public
+    container_name: 'an-public'
+    environment:
+      - SETENVIRONMENT=development # ## ### # ## ###
+    ports:
+      - 4000:4000
+    volumes: 
+      - ./public:/webpack
+      - /webpack/node_modules
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+  an-todo:
+    build: ./todo
+    container_name: 'an-todo'
+    volumes:
+      - ./public/dist:/www # ## ### # ## ###
+      - ./cdn/upload:/www/upload # ## ### # ## ###
+    ports:
+      - 80:80
+      - 443:443
+      - 3000:3000
+      - 3306:3306
+      - 27017:27017
+      - 6379:6379
+      - 5000:5000
+      - 2000:2000
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100k'
+        max-file: '5'
+secrets:
+  mysqlroot:
+    file: mysqlroot.txt
+  redisuser:
+    file: redisuser.txt

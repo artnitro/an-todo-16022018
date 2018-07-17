@@ -1,0 +1,17 @@
+/**
+ *  Fontface mixin.
+ */
+
+@mixin fontFace($family) {
+	@font-face {
+		font-family: $family;
+		src: url('../fonts/#{$family}.eot'); // IE9 compat
+		src: url('../fonts/#{$family}.eot?#iefix') format('embedded-opentype'), // IE8 and below
+			url('../fonts/#{$family}.woff') format('woff'), // standards
+			url('../fonts/#{$family}.ttf') format('truetype'), // Safari, Android, iOS
+			url('../fonts/#{$family}.svg##{$family}') format('svg'); // legacy iOS
+
+		font-style: normal;
+		font-weight: normal;
+	}
+}
