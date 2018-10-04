@@ -1,0 +1,38 @@
+/**
+* Border mixin.
+*/
+
+// MIXINS.
+
+// Border radius.
+
+@mixin an-border-radius($radius...) {
+  border-radius: $radius;
+}
+
+// Border color.
+
+@mixin an-border-color($color...) {
+  border-color: $color;
+}
+
+// Border width.
+
+@mixin an-border-width($width...) {
+  border-width: $width;
+}
+
+// Border style.
+
+@mixin an-border-style($style...) {
+  border-style: $style;
+}
+
+// Border rounded.
+
+@mixin an-border-rounded($radius: $an-border-radius, $color: $an-border-color, $width: $an-border-width, $style:$an-border-style) {
+  @include an-border-radius($radius);
+  @include an-border-color($color);
+  @include an-border-width($width);
+  @include an-border-style($style);
+}

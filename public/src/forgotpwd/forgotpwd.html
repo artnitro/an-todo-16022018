@@ -1,0 +1,27 @@
+<!-- 
+  Forgot password template.
+-->
+<div class="container h-100">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="h-75">
+      <header>
+        <figure class="an-mg-b-lg">
+          <img src="../../img/logo.png" alt="logotipo">
+        </figure>
+        <span class="an-d-block an-txt-left an-txt-s-lg an-mg-b-n">Forgot password?</span>
+        <span class="an-d-block an-txt-left an-txt-s-md an-mg-b-lg">Type your email to set new password</span>
+      </header>
+      <section>
+        <form [formGroup]="forgotpwdForm">
+          <div class="an-d-block an-mg-b-xl">
+            <input type="text" name="email" id="email" autocomplete="off" required>
+            <label for="email" class="an-mg-b-n">Email</label>
+          </div>
+          <div class="an-d-block an-txt-center">
+            <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">send</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

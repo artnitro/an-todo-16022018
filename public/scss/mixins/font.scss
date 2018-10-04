@@ -10,8 +10,5 @@
 			url('../fonts/#{$family}.woff') format('woff'), // standards
 			url('../fonts/#{$family}.ttf') format('truetype'), // Safari, Android, iOS
 			url('../fonts/#{$family}.svg##{$family}') format('svg'); // legacy iOS
-
-		font-style: normal;
-		font-weight: normal;
 	}
 }

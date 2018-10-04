@@ -1,0 +1,43 @@
+<!-- 
+  Sign up template.
+-->
+<div class="container h-100">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="h-75">
+      <header>
+        <figure class="an-mg-b-lg">
+          <img src="../../img/logo.png" alt="logotipo">
+        </figure>
+        <span class="an-d-block an-txt-left an-txt-s-lg an-mg-b-n">Create your account</span>
+        <span class="an-d-block an-txt-left an-txt-s-md an-mg-b-lg">to continue to app</span>
+      </header>
+      <section>
+        <form [formGroup]="signupForm" novalidate>
+          <div class="an-d-inline-block an-mg-b-sm an-mg-r-lg">
+            <input type="text" name="firstName" id="firstName" autocomplete="off" required>
+            <label for="firstName" class="an-mg-b-n">First name</label>
+          </div>
+          <div class="an-d-inline-block an-mg-b-sm">
+            <input type="text" name="lastName" id="lastName" autocomplete="off" required>
+            <label for="lastName" class="an-mg-b-n">Last name</label>
+          </div>
+          <div class="an-d-block an-mg-b-sm">
+            <input type="text" name="email" id="email" autocomplete="off" required>
+            <label for="email" class="an-mg-b-n">Email</label>
+          </div>
+          <div class="an-d-inline-block an-mg-b-lg an-mg-r-lg">
+            <input type="password" name="password" id="password" autocomplete="off" required>
+            <label for="password" class="an-mg-b-n">Password</label>
+          </div>
+          <div class="an-d-inline-block an-mg-b-xl">
+            <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="off" required>
+            <label for="confirmPassword" class="an-mg-b-n">Confirm password</label>
+          </div>
+          <div class="an-d-block an-txt-center">
+            <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">Send</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

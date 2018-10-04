@@ -1,0 +1,7 @@
+/**
+* Transition mixin.
+*/
+
+@mixin an-transition($values...) {
+  transition: $values;
+}

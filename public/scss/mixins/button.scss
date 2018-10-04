@@ -1,0 +1,75 @@
+/**
+* Button mixins and clases.
+*
+*/
+
+// MIXINS.
+
+// Button size.
+
+@mixin an-button-size($padding-y, $padding-x, $font-size) {
+  font-size: $font-size;
+  padding: $padding-y $padding-x;
+}
+
+// Button color.
+
+@mixin an-button-color($background-color, $font-color) {
+  background-color: $background-color;
+  color: $font-color;
+}
+
+// CLASSES.
+
+/**
+* Button size.
+* an-btn-lg/md/sm
+*/
+
+@each $size, $padding-y, $padding-x, $font-size in 
+  (lg, $an-button-padding-y, $an-button-padding-x, $an-font-size-lg),
+  (md, $an-button-padding-y, $an-button-padding-x, $an-font-size-md),
+  (sm, $an-button-padding-y, $an-button-padding-x, $an-font-size-sm) {
+    .an-btn-#{$size} {
+      @include an-button-size($padding-y, $padding-x, $font-size);
+    }
+  }
+
+/**
+* Button color.
+* an-btn-color
+*/
+
+@each $type, $background-color, $font-color in 
+  (blue, $an-button-color-blue, $an-white),
+  (black, $an-button-color-black, $an-white) {
+    .an-btn-#{$type} {
+      cursor: pointer;
+      border: 0px;
+      @include an-button-color($background-color, $font-color);
+      @include an-transition(background-color ease-in-out .15s, color ease-in-out .15s);
+      &:focus {
+        outline: 0px;
+      }
+      &:hover {
+        @if $background-color == $an-blue {
+          background-color: $an-button-color-blue-hover;
+          color: $an-button-color-blue;
+          @include an-transition(background-color ease-in-out .15s, color ease-in-out .15s);
+        }
+      }
+      &:active {
+        @if $background-color == $an-blue {
+          background-color: $an-button-color-blue-active;
+          color: $an-button-color-blue;
+          @include an-transition(background-color ease-in-out .15s, color ease-in-out .15s);
+        }
+      }
+    }
+  }
+
+  // Rounded button.
+
+  .an-btn-rounded {
+    @include an-border-rounded();
+  }

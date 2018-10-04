@@ -1,0 +1,17 @@
+/**
+* Display.
+*/
+
+/**
+* Display.
+* an-d-block/inline/inline-block
+*/
+
+@each $type, $value in
+  (block, $an-display-block),
+  (inline, $an-display-inline),
+  (inline-block, $an-display-inblock) {
+    .an-d-#{$type} {
+      display: $value;
+    }
+  }

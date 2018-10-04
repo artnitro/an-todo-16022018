@@ -1,5 +1,5 @@
 /**
-* Load stylesheet custom and Bootstrap v4.1.1
+* Load custom stylesheet and Bootstrap v4.1.1
 */
 
 // Imports.
@@ -13,19 +13,8 @@
 @import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/utilities";
 
-@import './fonts/font.scss';
+@import './variables';
+@import './mixins/index';
+@import './utilities/index';
 
-// Includes.
-
-@include fontFace('AgencyFB-Reg');
-
-
-
-$backgroundColor: #cccccc;
-
-html, body {
-    height: 100%;
-    background-color: $backgroundColor;
-    font-family: AgencyFB-Reg;
-    font-size: 1.2em;
-}
+@import "./reboot";

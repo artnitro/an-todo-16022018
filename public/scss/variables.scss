@@ -1,0 +1,88 @@
+/**
+* Set variables for app.
+*/
+
+// Font.
+
+$an-font-family-base: roboto-regular !default;
+$an-font-family-extra: oswald-regular !default;
+$an-font-size-base: 1rem !default;
+$an-font-size-lg: 1.7rem !default;
+$an-font-size-md: 1rem !default;
+$an-font-size-sm: .88rem !default;
+$an-font-size-xs: .76rem !default;
+$an-font-weight-light: 300 !default;
+$an-font-weight-normal: 400 !default;
+$an-font-weight-bold: 700 !default;
+
+// Align.
+
+$an-text-align-left: left !important;
+$an-text-align-center: center !important;
+$an-text-align-right: right !important;
+
+// Color.
+
+$an-black: #000000 !default;
+$an-white: #ffffff !default;
+$an-gray: #808080 !default;
+$an-blue: #0070df !default;
+
+$an-black-light: #2c2c2c !default;
+$an-gray-light: #e5e5e5 !default;
+$an-blue-light: #eaf4ff !default;
+$an-blue-light-bis: #b9dcff !default;
+
+// Body.
+
+$an-body-bg: $an-white;
+$an-body-color: $an-black-light;
+
+// Margins.
+
+$an-margin-bottom-xl: 1.89rem !default;
+$an-margin-bottom-lg: 1.26rem !default;
+$an-margin-bottom-md: .63rem !default;
+$an-margin-bottom-sm: .32rem !default;
+$an-margin-bottom-n: 0rem !default;
+
+$an-margin-left-xl: 1.89rem !default;
+$an-margin-left-lg: 1.26rem !default;
+$an-margin-left-md: .63rem !default;
+$an-margin-left-sm: .32rem !default;
+$an-margin-left-n: 0rem !default;
+
+$an-margin-right-xl: 1.89rem !default;
+$an-margin-right-lg: 1.26rem !default;
+$an-margin-right-md: .63rem !default;
+$an-margin-right-sm: .32rem !default;
+$an-margin-right-n: 0rem !default;
+
+// Display.
+
+$an-display-block: block !important;
+$an-display-inline: inline !important;
+$an-display-inblock: inline-block !important;
+
+// Input.
+
+$an-input-padding-x: .45rem !default;
+
+// Button.
+
+$an-button-padding-x: .95rem !default;
+$an-button-padding-y: .25rem !default;
+
+$an-button-color-black: $an-black !default;
+
+$an-button-color-blue: $an-blue !default;
+$an-button-color-blue-hover: $an-blue-light !default;
+$an-button-color-blue-active: $an-blue-light-bis !default;
+$an-button-color-blue-font-color: $an-blue !default;
+
+// Border.
+
+$an-border-radius: .25rem !default;
+$an-border-width: 1px !default;
+$an-border-style: solid !default;
+$an-border-color: transparent !default;

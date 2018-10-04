@@ -1,0 +1,97 @@
+/**
+* General stylesheets.
+*/
+
+// Includes.
+
+@include fontFace($an-font-family-base);
+
+// roots.
+
+html, body {
+  height: 100%;
+  background-color: $an-body-bg;
+  color: $an-body-color;
+  font-family: $an-font-family-base;
+  font-size: $an-font-size-base;
+  font-weight: $an-font-weight-normal;
+}
+
+// Forms.
+
+label {
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  color: $an-gray;
+  left: $an-input-padding-x;
+  top: -26px;
+  @include an-transition(top ease-in-out .15s, color ease-in-out .15s, font-size ease-in-out .15s);
+}
+
+input {
+  display: block;
+  position: relative;
+  padding: 0px $an-input-padding-x 0px;
+  background-color: transparent;
+  border-width: 0px 0px 2px 0px;
+  border-color: $an-gray-light;
+  border-style: solid;
+  @include an-transition(border-color ease-in-out .15s);
+  &:focus {
+    outline: 0px;
+    border-width: 0px 0px 2px 0px;
+    border-color: $an-blue;
+    @include an-transition(border-color ease-in-out .15s);
+  }
+  &:focus ~ label, &:valid ~ label {
+    left: $an-input-padding-x;
+    top: 2px;
+    color: $an-blue;
+    font-size: $an-font-size-xs;
+    @include an-transition(top ease-in-out .15s, color ease-in-out .15s, font-size ease-in-out .15s);
+  }
+  &:not(:focus) ~ label {
+    color: $an-gray;
+    @include an-transition(top ease-in-out .15s, color ease-in-out .15s, font-size ease-in-out .15s);
+  }
+}
+
+button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+// Anchors.
+
+a {
+  display: inline-block;
+  padding: 2px 3px 2px 3px;
+  color: $an-blue;
+  text-decoration: none;
+  background-color: transparent;
+  outline: 0px;
+  @include an-transition(background-color ease-in-out .15s);
+  &:visited {
+    color: $an-blue;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0px;
+    @include an-transition(background-color ease-in-out .15s);
+  }
+  &:hover {
+    color: $an-blue;
+    text-decoration: none;
+    background-color: $an-blue-light;
+    outline: 0px;
+    @include an-transition(background-color ease-in-out .15s);
+  }
+  &:active {
+    color: $an-blue;
+    text-decoration: none;
+    background-color: $an-blue-light-bis;
+    outline: 0px;
+    @include an-transition(background-color ease-in-out .15s);
+  }
+}

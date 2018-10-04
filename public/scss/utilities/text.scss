@@ -1,0 +1,31 @@
+/**
+* Texts.
+*/
+
+/**
+* Text size.
+* an-txt-s-/lg/md/sm
+*/
+
+@each $size, $value in
+  (lg, $an-font-size-lg),
+  (md, $an-font-size-md),
+  (sm, $an-font-size-sm) {
+    .an-txt-s-#{$size} {
+      font-size: $value;
+    }
+  }
+
+/**
+* Text align.
+* an-txt-left/center/right
+*/
+
+@each $align, $value in 
+  (left, $an-text-align-left),
+  (center, $an-text-align-center),
+  (right, $an-text-align-right) {
+    .an-txt-#{$align} {
+      text-align: $value;
+    }
+  }
