@@ -4,13 +4,15 @@
 
 /**
 * Display.
-* an-d-block/inline/inline-block
+* an-d-block/inline/inline-block/flex
 */
 
 @each $type, $value in
   (block, $an-display-block),
   (inline, $an-display-inline),
-  (inline-block, $an-display-inblock) {
+  (inline-block, $an-display-inline-block),
+  (flex, $an-display-flex),
+  (inline-flex, $an-display-inline-flex) {
     .an-d-#{$type} {
       display: $value;
     }

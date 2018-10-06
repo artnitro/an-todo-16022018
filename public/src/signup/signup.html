@@ -13,27 +13,34 @@
       </header>
       <section>
         <form [formGroup]="signupForm" novalidate>
-          <div class="an-d-inline-block an-mg-b-sm an-mg-r-lg">
-            <input type="text" name="firstName" id="firstName" autocomplete="off" required>
-            <label for="firstName" class="an-mg-b-n">First name</label>
-          </div>
-          <div class="an-d-inline-block an-mg-b-sm">
-            <input type="text" name="lastName" id="lastName" autocomplete="off" required>
-            <label for="lastName" class="an-mg-b-n">Last name</label>
+          <div class="an-d-block an-mg-b-sm">
+            <div class="an-d-inline-block an-mg-r-lg">
+              <input type="text" name="firstName" id="firstName" autocomplete="off" required>
+              <label for="firstName" class="an-mg-b-n">First name</label>
+            </div>
+            <div class="an-d-inline-block">
+              <input type="text" name="lastName" id="lastName" autocomplete="off" required>
+              <label for="lastName" class="an-mg-b-n">Last name</label>
+            </div>
           </div>
           <div class="an-d-block an-mg-b-sm">
             <input type="text" name="email" id="email" autocomplete="off" required>
             <label for="email" class="an-mg-b-n">Email</label>
           </div>
-          <div class="an-d-inline-block an-mg-b-lg an-mg-r-lg">
-            <input type="password" name="password" id="password" autocomplete="off" required>
-            <label for="password" class="an-mg-b-n">Password</label>
+          <div class="an-d-block an-mg-b-lg">
+            <div class="an-d-inline-block an-mg-r-lg">
+              <input type="password" name="password" id="password" autocomplete="off" required>
+              <label for="password" class="an-mg-b-n">Password</label>
+            </div>
+            <div class="an-d-inline-block">
+              <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="off" required>
+              <label for="confirmPassword" class="an-mg-b-n">Confirm password</label>
+            </div>
           </div>
-          <div class="an-d-inline-block an-mg-b-xl">
-            <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="off" required>
-            <label for="confirmPassword" class="an-mg-b-n">Confirm password</label>
+          <div class="an-d-block an-txt-left an-mg-b-xl">
+            <a routerLink="/signin" class="an-txt-s-sm">Prefer to sign in session</a>
           </div>
-          <div class="an-d-block an-txt-center">
+          <div class="an-center-h">
             <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">Send</button>
           </div>
         </form>
