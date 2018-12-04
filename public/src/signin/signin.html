@@ -5,21 +5,31 @@
   <div class="row justify-content-center align-items-center h-100">
     <div class="h-75">
       <header>
+        <div class="an-d-block an-mg-b-lg">
           <figure class="an-mg-b-lg">
               <img src="../../img/logo.png" alt="logotipo">
           </figure>
-          <span class="an-d-block an-txt-left an-txt-s-lg an-mg-b-n">Sign in</span>
-          <span class="an-d-block an-txt-left an-txt-s-md an-mg-b-lg">to continue to app</span>
+          <span class="an-d-block an-txt-left an-txt-s-lg">Sign in</span>
+          <span class="an-d-block an-txt-left an-txt-s-md">to continue to app</span>
+        </div>
       </header>
       <section>
-        <form [formGroup]="signinForm" novalidate>
+        <form [formGroup]="signinForm" (ngSubmit)="signin()" novalidate>
           <div class="an-d-block an-mg-b-sm">
-            <input type="text" name="email" id="email" autocomplete="off" required>
-            <label for="email" class="an-mg-b-n">Email</label>
+            <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
+            <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
           </div>
-          <div class="an-d-block an-mg-b-lg">
-            <input type="password" name="password" id="password" autocomplete="off" required>
-            <label for="password" class="an-mg-b-n">Password</label>
+          <div class="an-d-block an-mg-b-md">
+            <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
+            <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">Password</label>
+          </div>
+          <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
+            <div class="an-d-inline-block an-blink">
+              <p class="an-txt-s-sm an-mg-l-sm">&gt;</p>
+            </div>
+            <div class="an-d-inline-block">
+              <an-message [message]="formMessage" [ngStyle]="{'color': formMessageColor}"></an-message>
+            </div>
           </div>
           <div class="an-d-block an-mg-b-md">
             <a routerLink="/forgotpwd" class="an-txt-s-sm">Forgot password?</a>

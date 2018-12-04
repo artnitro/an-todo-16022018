@@ -5,7 +5,7 @@
 const 
   path = require('path'),
   webpack = require('webpack'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  MiniCssExtractPlugin = require("mini-css-extract-plugin"),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   CompressionPlugin = require('compression-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
@@ -110,27 +110,27 @@ module.exports = function(env){
         	]
         },
         {
-          test: /\.scss$/,
-          use: ExtractTextPlugin.extract({
-            use: [
-          	  {
-           		  loader: 'css-loader',
-           		  options: { minimize: true }
-           	  }, 
-           	  { loader: 'sass-loader' }
-            ],
-            fallback: 'style-loader'
-          })
-        }
+          test: /\.s?[ac]ss$/,
+          use: [
+              MiniCssExtractPlugin.loader,
+              { 
+                loader: 'css-loader',
+                options: {
+                  minimize: true
+                }
+              },
+              { loader: 'sass-loader' }
+          ],
+        },
       ]
     },
     plugins: [
       new webpack.DefinePlugin({
         'an_ENVIRONMENT': JSON.stringify(process.env.NODE_ENV)
       }),
-      new ExtractTextPlugin({
-        filename: 'css/styles.css',
-        allChunks: true
+      new MiniCssExtractPlugin({
+        filename: "css/styles.css",
+        chunkFilename: "css/[id].css"
       }),
       new HtmlWebpackPlugin({
         template: '!!raw-loader!templates/index/index.html',

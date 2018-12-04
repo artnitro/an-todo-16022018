@@ -5,17 +5,27 @@
   <div class="row justify-content-center align-items-center h-100">
     <div class="h-75">
       <header>
-        <figure class="an-mg-b-lg">
-          <img src="../../img/logo.png" alt="logotipo">
-        </figure>
-        <span class="an-d-block an-txt-left an-txt-s-lg an-mg-b-n">Forgot password?</span>
-        <span class="an-d-block an-txt-left an-txt-s-md an-mg-b-lg">Type your email to set new password</span>
+        <div class="an-d-block an-mg-b-lg">
+          <figure class="an-mg-b-lg">
+            <img src="../../img/logo.png" alt="logotipo">
+          </figure>
+          <span class="an-d-block an-txt-left an-txt-s-lg">Forgot password?</span>
+          <span class="an-d-block an-txt-left an-txt-s-md">Type your email to set new password</span>
+        </div>
       </header>
       <section>
-        <form [formGroup]="forgotpwdForm">
-          <div class="an-d-block an-mg-b-xl">
-            <input type="text" name="email" id="email" autocomplete="off" required>
-            <label for="email" class="an-mg-b-n">Email</label>
+        <form [formGroup]="forgotpwdForm" (ngSubmit)="forgotPwd()" novalidate>
+          <div class="an-d-block an-mg-b-md">
+            <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
+            <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
+          </div>
+          <div class="an-d-block an-mg-b-lg" [ngStyle]="{'color': formMessageColor}">  
+            <div class="an-d-inline-block an-blink">
+              <p class="an-txt-s-sm an-mg-l-sm">&gt;</p>
+            </div>
+            <div class="an-d-inline-block">
+              <an-message [message]="formMessage" [ngStyle]="{'color': formMessageColor}"></an-message>
+            </div>
           </div>
           <div class="an-center-h">
             <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">send</button>

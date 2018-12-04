@@ -8,8 +8,8 @@ import { AppModule } from './app.module';
 
 import '../scss/index.scss';
 
-console.log('>>> Starting the application.');
-console.log('>>> Environment: ', an_ENVIRONMENT);
+console.info('>>>>> Starting the application.');
+console.info('>> Environment: ', an_ENVIRONMENT);
 
 if (an_ENVIRONMENT == 'production') {
   enableProdMode();
@@ -29,9 +29,11 @@ switch (document.readyState) {
 
 
 function bootstrap() {
-  console.log('> Completed load.');
-  console.log('> Loaded and parsed DOM.');
+  console.info('> Completed load.');
+  console.info('> Loaded and parsed DOM.');
 
-  platformBrowserDynamic().bootstrapModule(AppModule);  
+  platformBrowserDynamic().bootstrapModule(AppModule)
+    .then(success => console.info('>>>>> Bootstrap success.'))  
+    .catch(err => console.error('>>>>> BootStrap Error: ', err));
 }
 
