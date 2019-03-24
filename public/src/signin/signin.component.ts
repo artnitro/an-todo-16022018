@@ -2,35 +2,38 @@
  * Sign in component.
 */
 
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { LocalStorageService } from 'ngx-webstorage';
 
-import { COLORS } from '../app.config';
+import { COLORS, TOKEN } from '../app.config';
 import { AFields } from '../services/form/AFields';
-import { Request } from '../services/http/request.service';
+import { SigninService } from './signin.service';
 
 @Component({
   selector: 'signin',
   templateUrl: './signin.html',
 })
 
-export class SigninComponent extends AFields implements OnInit {
-  
-  // formData$: Observable<array>;
+export class SigninComponent extends AFields implements OnInit, OnDestroy {
   
   signinForm: FormGroup;
 
+  subscription: Subscription;
   hasError: object = {};
-
   formColor: string;
   formMessage: string; 
   formMessageColor: string;
   
-  constructor(private fb: FormBuilder, private rq: Request) {
+  constructor(
+    private fb: FormBuilder, 
+    private signinService: SigninService,
+    private LocalStorage: LocalStorageService
+  ) {
     super();
     console.info('>>>>> Signin component.');
-    
   }
 
   ngOnInit() {
@@ -39,53 +42,58 @@ export class SigninComponent extends AFields implements OnInit {
       password: this.password()
     });
     this.formMessage = 'Type correctly data.';
+    this.LocalStorage.clear();
   }
 
-  // TODO:
   sendData() {
-    console.log('>> Sending data');
-    console.log('>>> Form data: ', this.signinForm.value);
-
-    // get.
-
-    // const url = 'http://api.chucknorris.io/jokes/random?category=celebrity';
-    // this.rq.get$(url).subscribe(
-    //   data => console.log('>>> Datos: ', data),
-    //   err => console.error('>>> Error: ', err)
-    // );
-
-    // Post
-
-    const url = 'http://api.antodo.local:3000/api/v1/';
-    const body = this.signinForm.value;
-
-    this.rq.post$(url, body).subscribe(
-      data => console.log('>>> Datos: ', data),
-      err => console.log('>>> Error: ', err)
-    );
-
+    this.subscription = this.signinService 
+      .isUser$({
+        email: this.signinForm.value.email, 
+        password: this.signinForm.value.password
+      })
+      .pipe(map(result => result.data))
+      .subscribe(
+        data => {
+          this.saveToken(data.isUser);
+        },
+        err => {
+          console.warn('>>> Error: ', err);
+          this.typingError(COLORS.red, err.toString().replace(/Error: GraphQL error:/g, ''));
+        }
+      );
   }
 
-  typingError(colors: string) {
-    this.formMessage = 'ERROR. Type correctly data.';
+  // TODO: 
+  saveToken(token: string) {
+    console.log ('>>> Saving token.');
+    this.LocalStorage.store(TOKEN.tokenName, token);
+    // Redirect to dashboard
+  }
+
+  typingError(colors: string, text: string) {
+    this.formMessage = text;
     this.formMessageColor = colors;
     this.formColor = colors;
   }
 
-  typingOk(colors: string) {
-    this.formMessage = 'OK. Waiting for server response.';
+  typingOk(colors: string, text: string) {
+    this.formMessage = text;
     this.formMessageColor = colors;
   }
 
   signin() {
     this.hasError = this.checkFields(this.signinForm);
     (Object.keys(this.hasError).length)
-      ? this.typingError(COLORS.red)
+      ? this.typingError(COLORS.red, 'ERROR. Type correctly data.')
       :
         (
-          this.typingOk(COLORS.black),
+          this.typingOk(COLORS.black, 'OK. Waiting for server response.'),
           this.sendData()
         )
+  }
+
+  ngOnDestroy() {
+    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
   }
 
 }

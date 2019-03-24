@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import { RoutingModule } from './signup.routing';
 import { MessageModule } from '../components/message/message.module';
 
-import {SignupComponent} from './signup.component';
+import { SignupComponent } from './signup.component';
+import { SignupService } from './signup.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {SignupComponent} from './signup.component';
     RoutingModule,
     MessageModule
   ],
+  providers: [SignupService],
   declarations: [SignupComponent]
 })
 

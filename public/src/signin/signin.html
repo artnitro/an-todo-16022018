@@ -5,7 +5,7 @@
   <div class="row justify-content-center align-items-center h-100">
     <div class="h-75">
       <header>
-        <div class="an-d-block an-mg-b-lg">
+        <div class="an-mg-b-lg an-card-box">
           <figure class="an-mg-b-lg">
               <img src="../../img/logo.png" alt="logotipo">
           </figure>
@@ -15,30 +15,32 @@
       </header>
       <section>
         <form [formGroup]="signinForm" (ngSubmit)="signin()" novalidate>
-          <div class="an-d-block an-mg-b-sm">
-            <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
-            <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
-          </div>
-          <div class="an-d-block an-mg-b-md">
-            <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
-            <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">Password</label>
-          </div>
-          <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
-            <div class="an-d-inline-block an-blink">
-              <p class="an-txt-s-sm an-mg-l-sm">&gt;</p>
+          <div class="an-card-box">
+            <div class="an-d-block an-mg-b-sm">
+              <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
+              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
             </div>
-            <div class="an-d-inline-block">
-              <an-message [message]="formMessage" [ngStyle]="{'color': formMessageColor}"></an-message>
+            <div class="an-d-block an-mg-b-md">
+              <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
+              <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">Password</label>
             </div>
-          </div>
-          <div class="an-d-block an-mg-b-md">
-            <a routerLink="/forgotpwd" class="an-txt-s-sm">Forgot password?</a>
-          </div>
-          <div class="an-d-block an-mg-b-xl">
-            <a routerLink="/signup" class="an-txt-s-sm">Create account</a>
-          </div>
-          <div class="an-center-h">
+            <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
+              <div class="an-d-inline-block an-blink">
+                <p class="an-txt-s-sm an-mg-l-sm">&gt;</p>
+              </div>
+              <div class="an-d-inline-block">
+                <an-message [message]="formMessage" [ngStyle]="{'color': formMessageColor}"></an-message>
+              </div>
+            </div>
+            <div class="an-d-block an-mg-b-md">
+              <a routerLink="/forgotpwd" class="an-txt-s-sm">Forgot password?</a>
+            </div>
+            <div class="an-d-block an-mg-b-xl">
+              <a routerLink="/signup" class="an-txt-s-sm">Create account</a>
+            </div>
+            <div class="an-center-h">
               <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">send</button>
+            </div>
           </div>
         </form>
       </section>

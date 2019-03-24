@@ -8,11 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule} from '@angular/common';
 
 import { MessageModule } from '../components/message/message.module';
-
-import { Request } from '../services/http/request.service';
-
 import { SigninComponent } from './signin.component';
-
+import { SigninService } from './signin.service';
 
 @NgModule({
   imports: [
@@ -21,7 +18,7 @@ import { SigninComponent } from './signin.component';
     CommonModule,
     MessageModule,
   ],
-  providers: [Request],
+  providers: [SigninService],
   declarations: [SigninComponent],
   exports: [SigninComponent]
 })

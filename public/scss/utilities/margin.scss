@@ -48,7 +48,7 @@
   (lg, $an-margin-right-lg), 
   (md, $an-margin-right-md), 
   (sm, $an-margin-right-sm),
-  (n, $an-margin-left-n) {
+  (n, $an-margin-right-n) {
     .an-mg-r-#{$size} {
       margin-right: $value;
     }

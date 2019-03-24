@@ -1,0 +1,9 @@
+/**
+* Card mixin.
+*/
+
+@mixin an-ca-box($padding, $color: $an-white) {
+  display: block;
+  background-color: $color;
+  padding: $padding;
+}

@@ -15,7 +15,7 @@ npm-debug-log*
 
 .dockerignore
 
-# dotenv environment variabes file
+# dotenv environment variables file
 
 **/*.env
 
@@ -24,11 +24,14 @@ npm-debug-log*
 **/certs*
 **/db*
 public/dist
+api/dist
+oauth/dist
 
 # Files
 
 **/*.txt
 **/*.pem
+**/nodemon.json
 
 
 

@@ -5,3 +5,67 @@
 .an-padding-n {
   padding: 0px;
 }
+
+/**
+* Padding-bottom.
+* an-pg-b-xl/lg/md/sm/n
+*/
+
+@each $size, $value in
+  (xl, $an-padding-bottom-xl),
+  (lg, $an-padding-bottom-lg), 
+  (md, $an-padding-bottom-md), 
+  (sm, $an-padding-bottom-sm),
+  (n, $an-padding-bottom-n) {
+    .an-pg-b-#{$size} {
+      padding-bottom: $value;
+    }
+  }
+
+/**
+* Padding-left.
+* an-mg-l-xl/lg/md/sm/n
+*/
+
+@each $size, $value in
+  (xl, $an-padding-left-xl),
+  (lg, $an-padding-left-lg), 
+  (md, $an-padding-left-md), 
+  (sm, $an-padding-left-sm),
+  (n, $an-padding-left-n) {
+    .an-pg-l-#{$size} {
+      padding-left: $value;
+    }
+  }
+
+/**
+* Padding-right.
+* an-pg-r-xl/lg/md/sm/n
+*/
+
+@each $size, $value in
+  (xl, $an-padding-right-xl),
+  (lg, $an-padding-right-lg), 
+  (md, $an-padding-right-md), 
+  (sm, $an-padding-right-sm),
+  (n, $an-padding-right-n) {
+    .an-pg-r-#{$size} {
+      padding-right: $value;
+    }
+  }
+
+/**
+* Padding-top.
+* an-pg-t-xl/lg/md/sm/n
+*/
+
+@each $size, $value in
+  (xl, $an-padding-top-xl),
+  (lg, $an-padding-top-lg), 
+  (md, $an-padding-top-md), 
+  (sm, $an-padding-top-sm),
+  (n, $an-padding-top-n) {
+    .an-pg-t-#{$size} {
+      padding-top: $value;
+    }
+  }

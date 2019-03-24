@@ -95,3 +95,9 @@ a {
     @include an-transition(background-color ease-in-out .15s);
   }
 }
+
+// Cards.
+
+.an-card-box {
+  @include an-ca-box($an-padding-lg); 
+}
