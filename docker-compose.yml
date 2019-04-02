@@ -19,6 +19,11 @@ services:
   an-mongo:
     build: ./mongo
     container_name: 'an-mongo'
+    secrets:
+      - mongoroot
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongoroot
     volumes:
       - ./mongo/db-mongo:/data/db
     restart: always
@@ -121,3 +126,5 @@ secrets:
     file: mysqlroot.txt
   redisuser:
     file: redisuser.txt
+  mongoroot:
+    file: mongoroot.txt
