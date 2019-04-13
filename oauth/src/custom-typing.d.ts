@@ -3,3 +3,4 @@
  */
 
 declare const process: any;
+declare const console: any;

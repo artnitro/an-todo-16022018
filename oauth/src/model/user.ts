@@ -1,5 +1,5 @@
 /**
- * User model.
+ * Setup User model.
  */
 
 import * as Sequelize from 'sequelize';

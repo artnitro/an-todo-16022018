@@ -13,7 +13,7 @@
   "homepage": "https://github.com/artnitro/an-todo-16022018.git#readme",
   "main": "/src/app.js",
   "scripts": {
-    "tsc": "tsc ./src/app.ts --watch --pretty --outDir dist",
+    "tsc": "tsc ./src/app.ts --watch --pretty --outDir dist --experimentalDecorators true --emitDecoratorMetadata true --lib es2016,es2016.array.include",
     "nodemon": "nodemon ./dist/app.js",
     "start": "run-p tsc nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,8 +30,10 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
+    "inversify": "^5.0.1",
     "jsonwebtoken": "^8.5.0",
     "mysql2": "^1.6.4",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {

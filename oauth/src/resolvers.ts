@@ -2,12 +2,20 @@
  * Resolvers for graphql.
  */
 
-import * as bcrypt from 'bcryptjs';
-import * as jwt from "jsonwebtoken";
+import { inject, injectable } from 'inversify';
 
-import { models } from './model/mysql';
+import { models } from './model/mysql'; // Remove when I removed the getUser() method.
+import { IUser } from './services/IUser';
+import { TYPES } from './services/types';
 
+@injectable()
 export class Resolvers {
+
+  static _user: IUser;
+  
+  private constructor( @inject(TYPES.IUserId) private user: IUser ) {
+    Resolvers._user = user;
+  }
 
   static getUsers() {
     return models.User
@@ -18,56 +26,27 @@ export class Resolvers {
   }
 
   static isUser(args) {
-    return models.User
-      .findOne({
-        where: {
-          email: args.isUser.email,
-        }
-      })
-      .then( user => {
-        return ( user !== null )
-          ? bcrypt.compareSync(args.isUser.password, user.dataValues.password)
-            ? jwt.sign(
-                {
-                  id: user.dataValues.uuid,
-                  email: user.dataValues.email
-                }, 
-                process.env.JWT_SECRET, 
-                {
-                  expiresIn: 60
-                } 
-              ) 
-            : new Error ('Error. User does not exist.')
-          : new Error ('Error. User does not exist.');
+    return Resolvers._user.findOne(args)
+      .then( user => user )
+      .catch( err => {
+        console.log('>>>>> Error: ', err);
+        return new Error(err);
       })
   }
-  
-  static createUser (args, context) {
-    // console.log('>>> Context: ', context.headers);
-    let salt = bcrypt.genSaltSync(10);
-    args.cuser.password = bcrypt.hashSync(args.cuser.password, salt);
 
-    return models.User
-      .findOrCreate({
-        where: {
-          email: args.cuser.email
-        }, 
-        defaults: args.cuser
+  /*
+    static createUser(arg, context) {
+      console.log('>>> Context: ', context.headers);
+    }
+  */
+  
+  static createUser(args) {
+    return Resolvers._user.findOrCreate(args)
+      .then( user => user )
+      .catch( err => {
+        console.log('>>>>> Error: ', err);
+        return new Error(err);
       })
-      .spread( (userData, created) => {
-        return (created) 
-          ? jwt.sign(
-              {
-                id: userData.dataValues.uuid,
-                email: userData.dataValues.email
-              }, 
-              process.env.JWT_SECRET, 
-              {
-                expiresIn: 60
-              } 
-            ) 
-          : new Error('Error. User already exists.');
-      });
   }
 
 }

@@ -1,13 +1,17 @@
 /**
- * 
+ * Routes for app.
  */
+
+import 'reflect-metadata';
 
 import * as express from 'express';
 import * as graphqlHttp from 'express-graphql';
-import { buildSchema } from 'graphql';
 
 import { schema } from './buildschema';
 import { Resolvers } from './resolvers';
+import { container } from './container';
+
+container.get<Resolvers>(Resolvers);
 
 export class Router {
 
