@@ -2,7 +2,7 @@
  * User interface.
  */
 
-export interface IUser {
-  findOne(args): Promise<any>;
-  findOrCreate(args): Promise<any>;
-}
+import { IFindOne } from './IFindone';
+import { IFindOrCreate } from './IFindorcreate';
+
+export interface IUser extends IFindOne, IFindOrCreate {}
