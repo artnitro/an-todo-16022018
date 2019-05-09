@@ -11,6 +11,9 @@ import { schema } from './buildschema';
 import { Resolvers } from './resolvers';
 import { container } from './container';
 
+import { errorName } from './services/error/errorname';
+import { errorDefinition } from './services/error/errordefinition';
+
 container.get<Resolvers>(Resolvers);
 
 export class Router {
@@ -29,11 +32,18 @@ export class Router {
       graphiql: true
     }));
     
-    this.route.post('/oauth/v1/', graphqlHttp( request => {
+    this.route.post('/oauth/v1/', graphqlHttp( (request, response) => {
       return {
         schema: schema,
         rootValue: Resolvers,
-        context: request
+        context: {
+          req: request,
+          res: response,
+          errorName: errorName
+        },
+        formatError: (err) => {
+          return errorDefinition[err.message];
+        }
       }
     }));
 

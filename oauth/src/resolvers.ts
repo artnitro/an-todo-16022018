@@ -11,10 +11,10 @@ import { TYPES } from './services/types';
 @injectable()
 export class Resolvers {
 
-  static _user: IUser;
+  static user: IUser;
   
   private constructor( @inject(TYPES.IUserId) private user: IUser ) {
-    Resolvers._user = user;
+    Resolvers.user = user;
   }
 
   static getUsers() {
@@ -25,28 +25,34 @@ export class Resolvers {
       });
   }
 
-  static isUser(args) {
-    return Resolvers._user.findOne(args)
-      .then( user => user )
-      .catch( err => {
-        console.log('>>>>> Error: ', err);
-        return new Error(err);
+  static isUser(args, { errorName }) {
+    return Resolvers.user
+      .findOne(args)
+      .then( user => {
+        return (user !== null)
+          ? user
+          : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
   }
-
-  /*
-    static createUser(arg, context) {
-      console.log('>>> Context: ', context.headers);
-    }
-  */
   
-  static createUser(args) {
-    return Resolvers._user.findOrCreate(args)
-      .then( user => user )
-      .catch( err => {
-        console.log('>>>>> Error: ', err);
-        return new Error(err);
+  static createUser(args , { errorName }) {
+    return Resolvers.user
+      .findOrCreate(args)
+      .then( user => {
+        return (user === null)
+          ? (() => { throw new Error(errorName.BAD_REQUEST); })()
+          : (user === undefined)
+            ? (() => { throw new Error(errorName.UNVALIDATED); })()
+            : user;
       })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
   }
 
 }

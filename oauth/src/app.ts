@@ -40,7 +40,7 @@ class App {
           : res
               .status(500)
               .json({
-                error: '500 Internal Server Error' + err
+                error: '500 Internal Server Error'
               });
     }); 
   }

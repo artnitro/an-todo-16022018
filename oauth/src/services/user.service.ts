@@ -12,6 +12,11 @@ import { IUser } from './IUser';
 @injectable()
 export class UserService implements IUser {
 
+  /**
+   * @description It finds an user in database.
+   * @param args
+   * @returns string or null.
+   */
   async findOne(args) {
     try {
       let user = await models.User
@@ -20,17 +25,20 @@ export class UserService implements IUser {
             email: args.isUser.email,
           }
         })
-      return ( user !== null )
-        ? bcrypt.compareSync(args.isUser.password, user.dataValues.password)
-          ? this.createToken(user) 
-          : new Error ('Error. User does not exist.')
-        : new Error ('Error. User does not exist.');
+      return ( user !== null && bcrypt.compareSync(args.isUser.password, user.dataValues.password) )
+        ? this.createToken(user) 
+        : (() => { throw new Error('Database error: User does not exist'); })()    
     } catch (err) {
-      console.log('System error: ', err);
-      new Error ('System error, consult with your provider');
+      console.log(err);
+      return null;
     }
   }
 
+  /**
+   * @description It creates an user if the user does not exist.
+   * @param args
+   * @returns string, undefined or null.
+   */
   async findOrCreate(args) {
     let salt = bcrypt.genSaltSync(10);
     args.cuser.password = bcrypt.hashSync(args.cuser.password, salt);
@@ -46,15 +54,20 @@ export class UserService implements IUser {
         .spread( (userData, created) => {
           return (created) 
             ? this.createToken(userData) 
-            : new Error('Error. User already exists.');
+            : (() => { throw new Error('Database error: User already exists') })()
         });
       return user;
     } catch (err) {
-      console.log('System error: ', err);
-      new Error ('System error, consult with your provider');
+      console.log(err);
+      return (err.name === 'SequelizeValidationError') ? undefined : null;
     }
   }
 
+  /**
+   * @description It creates jwt from user data.
+   * @param userData 
+   * @returns string
+   */
   private createToken(userData): string {
     return jwt.sign(
       {
