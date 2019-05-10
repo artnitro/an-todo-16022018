@@ -152,6 +152,9 @@ module.exports = function(env){
         {
           from: path.join(__dirname, '/img'), 
           to: path.join(__dirname, 'dist/img')
+        }, {
+          from: path.join(__dirname, '/src/i18n'),
+          to: path.join(__dirname, 'dist/i18n')
         }
       ]),
       new BundleAnalyzerPlugin ({
