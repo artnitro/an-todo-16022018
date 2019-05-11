@@ -9,8 +9,8 @@
           <figure class="an-mg-b-lg">
               <img src="../../img/logo.png" alt="logotipo">
           </figure>
-          <span class="an-d-block an-txt-left an-txt-s-lg">Sign in</span>
-          <span class="an-d-block an-txt-left an-txt-s-md">to continue to app</span>
+          <span class="an-d-block an-txt-left an-txt-s-lg">{{'SIGNIN.HEADER1' | translate}}</span>
+          <span class="an-d-block an-txt-left an-txt-s-md">{{'SIGNIN.HEADER2' | translate}}</span>
         </div>
       </header>
       <section>
@@ -18,11 +18,11 @@
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-sm">
               <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
+              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'SIGNIN.EMAIL' | translate}}</label>
             </div>
             <div class="an-d-block an-mg-b-md">
               <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
-              <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">Password</label>
+              <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">{{'SIGNIN.PASSWORD' | translate}}</label>
             </div>
             <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
               <div class="an-d-inline-block an-blink">
@@ -33,13 +33,13 @@
               </div>
             </div>
             <div class="an-d-block an-mg-b-md">
-              <a routerLink="/forgotpwd" class="an-txt-s-sm">Forgot password?</a>
+              <a routerLink="/forgotpwd" class="an-txt-s-sm">{{'SIGNIN.FORGOT' | translate}}</a>
             </div>
             <div class="an-d-block an-mg-b-xl">
-              <a routerLink="/signup" class="an-txt-s-sm">Create account</a>
+              <a routerLink="/signup" class="an-txt-s-sm">{{'SIGNIN.CREATE' | translate}}</a>
             </div>
             <div class="an-center-h">
-              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">send</button>
+              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">{{'SIGNIN.BUTTON' | translate}}</button>
             </div>
           </div>
         </form>

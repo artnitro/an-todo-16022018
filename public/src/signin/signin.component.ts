@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
+import { TranslateService } from '@ngx-translate/core';
 
 import { COLORS, TOKEN } from '../app.config';
 import { AFields } from '../services/form/AFields';
@@ -30,9 +31,10 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder, 
     private signinService: SigninService,
-    private LocalStorage: LocalStorageService
+    private LocalStorage: LocalStorageService, 
+    public translate: TranslateService
   ) {
-    super();
+    super(); 
     console.info('>>>>> Signin component.');
   }
 
@@ -41,8 +43,11 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
       email: this.email(),
       password: this.password()
     });
-    this.formMessage = 'Type correctly data.';
     this.LocalStorage.clear();
+    this.translate.get('SIGNIN.STATUS1').subscribe((res: string) => {
+      this.formMessage = res;
+    });
+
   }
 
   sendData() {
@@ -57,8 +62,16 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
           this.saveToken(data.isUser);
         },
         err => {
-          console.warn('>>> Error: ', err);
-          this.typingError(COLORS.red, err.toString().replace(/Error: GraphQL error:/g, ''));
+          Object
+            .keys(err.graphQLErrors)
+            .filter((element) => {
+              (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 401)
+                ? this.typingError(COLORS.red, 'SIGNIN.ERROR2')
+                : (
+                    console.error('>>> The statusCode property is likely not setup.'),
+                    this.typingError(COLORS.red, 'SIGNIN.ERROR3')
+                  )
+            })
         }
       );
   }
@@ -71,23 +84,27 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   }
 
   typingError(colors: string, text: string) {
-    this.formMessage = text;
-    this.formMessageColor = colors;
-    this.formColor = colors;
+    this.translate.get(text).subscribe((res: string) => {
+      this.formMessage = res;
+      this.formMessageColor = colors;
+      this.formColor = colors;
+    });
   }
 
   typingOk(colors: string, text: string) {
-    this.formMessage = text;
-    this.formMessageColor = colors;
+    this.translate.get(text).subscribe((res: string) => {
+      this.formMessage = res;
+      this.formMessageColor = colors;
+    });
   }
 
   signin() {
     this.hasError = this.checkFields(this.signinForm);
     (Object.keys(this.hasError).length)
-      ? this.typingError(COLORS.red, 'ERROR. Type correctly data.')
+      ? this.typingError(COLORS.red, 'SIGNIN.ERROR1')
       :
-        (
-          this.typingOk(COLORS.black, 'OK. Waiting for server response.'),
+        (      
+          this.typingOk(COLORS.black, 'SIGNIN.STATUS2'),
           this.sendData()
         )
   }
