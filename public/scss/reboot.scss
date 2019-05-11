@@ -72,12 +72,14 @@ a {
   text-decoration: none;
   background-color: transparent;
   outline: 0px;
+  cursor: pointer;
   @include an-transition(background-color ease-in-out .15s);
   &:visited {
     color: $an-blue;
     text-decoration: none;
     background-color: transparent;
     outline: 0px;
+    cursor: pointer;
     @include an-transition(background-color ease-in-out .15s);
   }
   &:hover {
@@ -85,6 +87,7 @@ a {
     text-decoration: none;
     background-color: $an-blue-light;
     outline: 0px;
+    cursor: pointer;
     @include an-transition(background-color ease-in-out .15s);
   }
   &:active {
@@ -92,6 +95,7 @@ a {
     text-decoration: none;
     background-color: $an-blue-light-bis;
     outline: 0px;
+    cursor: pointer;
     @include an-transition(background-color ease-in-out .15s);
   }
 }
