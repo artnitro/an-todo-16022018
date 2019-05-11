@@ -1,0 +1,16 @@
+{
+  "SIGNIN": {
+    "HEADER1": "Sign in",
+    "HEADER2": "to continue to app",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "STATUS1": "Type correctly data",
+    "STATUS2": "OK. Waiting for server response",
+    "FORGOT": "Forgot password?",
+    "CREATE": "Create account",
+    "BUTTON": "Send",
+    "ERROR1": "ERROR. Type correctly data",
+    "ERROR2": "ERROR. User does not exist",
+    "ERROR3": "SYSTEM ERROR, consult with your provider."
+  }
+}

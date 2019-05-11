@@ -1,0 +1,18 @@
+{
+  "SIGNUP": {
+    "HEADER1": "Create your account",
+    "HEADER2": "to continue to app",
+    "FIRST": "First name",
+    "LAST": "Last name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "CONFIRM": "Confirm password",
+    "STATUS1": "Type correctly data",
+    "STATUS2": "OK. Waiting for server response",
+    "PREFER": "Prefer to sign in session",
+    "BUTTON": "Send",
+    "ERROR1": "ERROR. Type correctly data",
+    "ERROR2": "ERROR. User already exists",
+    "ERROR3": "SYSTEM ERROR, consult with your provider"
+  }
+}

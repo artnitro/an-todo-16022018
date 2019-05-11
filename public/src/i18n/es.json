@@ -1,0 +1,16 @@
+{
+  "SIGNIN": {
+    "HEADER1": "Registrarse",
+    "HEADER2": "para continuar en la app",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "STATUS1": "Escribe correctamente los datos",
+    "STATUS2": "OK. Esperando respuesta del servidor",
+    "FORGOT": "Olvidó el password?",
+    "CREATE": "Crea una cuenta",
+    "BUTTON": "Enviar",
+    "ERROR1": "ERROR. Escribe correctamente los datos",
+    "ERROR2": "ERROR. Usuario no existe.",
+    "ERROR3": "SYSTEM ERROR, consulta con tu proveedor"
+  }
+}
