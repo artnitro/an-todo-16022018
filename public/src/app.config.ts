@@ -16,3 +16,7 @@ export const TOKEN = {
   tokenName: 'an-todo-16022018'
 }
 
+export const LANGUAGE = {
+  defaultLanguage: 'en'
+}
+
