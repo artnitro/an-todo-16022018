@@ -13,7 +13,7 @@ export class UserService implements IUser {
 
   /**
    * @description It finds an user in database.
-   * @param args
+   * @param {object} args
    * @returns object or null.
    */
   async findOne(args) {
@@ -21,10 +21,10 @@ export class UserService implements IUser {
       let user = await models.User
         .findOne({
           where: {
-            email: args.isUser.email,
+            email: args.email,
           }
         })
-      return ( user !== null && bcrypt.compareSync(args.isUser.password, user.dataValues.password) )
+      return ( user !== null && bcrypt.compareSync(args.password, user.dataValues.password) )
         ? user
         : (() => { throw new Error('Database error: User does not exist'); })()    
     } catch (err) {
@@ -35,7 +35,7 @@ export class UserService implements IUser {
 
   /**
    * @description It creates an user if the user does not exist.
-   * @param args
+   * @param {object} args
    * @returns object, undefined or null.
    */
   async findOrCreate(args) {
