@@ -11,12 +11,18 @@ import { IUserData } from './IUserdata';
 @injectable()
 export class TokenService implements IToken {
 
-  getToken(userData: IUserData): string {
+  /**
+   * @description Get token from user data.
+   * @param {object} userData 
+   * @param {number} time 
+   * @returns string
+   */
+  getToken(userData: IUserData, time: number): string {
     return jwt.sign(
       userData, 
       process.env.JWT_SECRET, 
       {
-        expiresIn: 60
+        expiresIn: time
       } 
     )
   }
