@@ -7,8 +7,9 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
+import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, TOKEN } from '../app.config';
+import { COLORS, TOKEN, LANGUAGE } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { SignupService } from './signup.service';
@@ -31,10 +32,12 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private signupService: SignupService,
-    private localStorage: LocalStorageService 
+    private localStorage: LocalStorageService,
+    private translate: TranslateService 
   ) {
     super();
     console.info('>>>>> Signup component.');
+    this.translate.setDefaultLang(LANGUAGE.defaultLanguage);
   }
 
   ngOnInit() {
@@ -47,8 +50,10 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     });
-    this.formMessage = 'Type correctly data.';
     this.localStorage.clear();
+    this.translate.get('SIGNUP.STATUS1').subscribe((res: string) => {
+      this.formMessage = res;
+    });
   }
 
   sendData() {
@@ -65,12 +70,20 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
           this.saveToken(data.createUser);
         },
         err => {
-          console.warn('>>> Error: ', err);
-          this.typingError(COLORS.red, err.toString().replace(/Error: GraphQL error:/g, ''));
+          Object
+            .keys(err.graphQLErrors)
+            .filter((element) => {
+              (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 400)
+                ? this.typingError(COLORS.red, 'SIGNUP.ERROR2')
+                : (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 419)
+                    ? this.typingError(COLORS.red, 'SIGNUP.ERROR1')
+                    : (
+                        console.error('>>> The statusCode property is likely not setup.'),
+                        this.typingError(COLORS.red, 'SIGNUP.ERROR3')
+                      );
+            })
         }
       );
-
-    
   }
 
   // TODO:
@@ -81,23 +94,27 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   }
 
   typingError(colors: string, text: string) {
-    this.formMessage = text;
-    this.formMessageColor = colors;
-    this.formColor = colors;
+    this.translate.get(text).subscribe((res: string) => {
+      this.formMessage = res;
+      this.formMessageColor = colors;
+      this.formColor = colors;
+    });
   }
 
   typingOk(colors: string, text: string) {
-    this.formMessage = text;
-    this.formMessageColor = colors;
+    this.translate.get(text).subscribe((res: string) => {
+      this.formMessage = res;
+      this.formMessageColor = colors;
+    });
   }
 
   signup() {
     this.hasError = this.checkFields(this.signupForm);
     (Object.keys(this.hasError).length)
-      ? this.typingError(COLORS.red, 'ERROR. Type correctly data.')
+      ? this.typingError(COLORS.red, 'SIGNUP.ERROR1')
       :
         (
-          this.typingOk(COLORS.black, 'OK. Waiting for server response.'),
+          this.typingOk(COLORS.black, 'SIGNUP.STATUS2'),
           this.sendData()
         )
   }

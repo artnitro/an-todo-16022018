@@ -9,8 +9,8 @@
           <figure class="an-mg-b-lg">
             <img src="../../img/logo.png" alt="logotipo">
           </figure>
-          <span class="an-d-block an-txt-left an-txt-s-lg">Create your account</span>
-          <span class="an-d-block an-txt-left an-txt-s-md">to continue to app</span>
+          <span class="an-d-block an-txt-left an-txt-s-lg">{{'SIGNUP.HEADER1' | translate}}</span>
+          <span class="an-d-block an-txt-left an-txt-s-md">{{'SIGNUP.HEADER2' | translate}}</span>
         </div>
       </header>
       <section>
@@ -19,25 +19,25 @@
             <div class="an-d-block an-mg-b-sm">
               <div class="an-d-inline-block an-mg-r-lg">
                 <input type="text" name="firstName" id="firstName" formControlName="firstName"  [ngStyle]="{'border-color': hasError['firstName'] ? formColor : null}" autocomplete="off" required>
-                <label for="firstName" class="an-mg-b-n" [ngStyle]="{'color': hasError['firstName'] ? formColor : null}">First name</label>
+                <label for="firstName" class="an-mg-b-n" [ngStyle]="{'color': hasError['firstName'] ? formColor : null}">{{'SIGNUP.FIRST' | translate}}</label>
               </div>
               <div class="an-d-inline-block">
                 <input type="text" name="lastName" id="lastName" formControlName="lastName"  [ngStyle]="{'border-color': hasError['lastName'] ? formColor : null}" autocomplete="off" required>
-                <label for="lastName" class="an-mg-b-n" [ngStyle]="{'color': hasError['lastName'] ? formColor : null}">Last name</label>
+                <label for="lastName" class="an-mg-b-n" [ngStyle]="{'color': hasError['lastName'] ? formColor : null}">{{'SIGNUP.LAST' | translate}}</label>
               </div>
             </div>
             <div class="an-d-block an-mg-b-sm">
               <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
+              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'SIGNUP.EMAIL' | translate}}</label>
             </div>
             <div class="an-d-block an-mg-b-md">
               <div class="an-d-inline-block an-mg-r-lg">
                 <input type="password" name="password" id="password" formControlName="password"  [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" autocomplete="off" required>
-                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">Password</label>
+                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">{{'SIGNUP.PASSWORD' | translate}}</label>
               </div>
               <div class="an-d-inline-block">
                 <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [ngStyle]="{'border-color': hasError['confirmPassword'] ? formColor : null}" autocomplete="off" required>
-                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['confirmPassword'] ? formColor : null}">Confirm password</label>
+                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['confirmPassword'] ? formColor : null}">{{'SIGNUP.CONFIRM' | translate}}</label>
               </div>
             </div>
             <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
@@ -49,10 +49,10 @@
               </div>
             </div>
             <div class="an-d-block an-txt-left an-mg-b-xl">
-              <a routerLink="/signin" class="an-txt-s-sm">Prefer to sign in session</a>
+              <a routerLink="/signin" class="an-txt-s-sm">{{'SIGNUP.PREFER' | translate}}</a>
             </div>
             <div class="an-center-h">
-              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">Send</button>
+              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">{{'SIGNUP.BUTTON' | translate}}</button>
             </div>
           </div>
         </form>

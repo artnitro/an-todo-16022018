@@ -3,8 +3,5 @@
  */
 
 export interface ICreateUserData {
-  firstname: string,
-  lastname: string,
-  email: string,
-  password: string
+  [name: string]: string
 }
