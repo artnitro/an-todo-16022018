@@ -1,0 +1,18 @@
+{
+  "SIGNUP": {
+    "HEADER1": "Crear una cuenta",
+    "HEADER2": "para continuar en la app",
+    "FIRST": "Nombre",
+    "LAST": "Apellidos",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "CONFIRM": "Confirma password",
+    "STATUS1": "Escribe correctamente los datos",
+    "STATUS2": "OK. Esperando respuesta del servidor",
+    "PREFER": "Prefieres iniciar sesión",
+    "BUTTON": "Enviar",
+    "ERROR1": "ERROR. Escribe correctamente los datos",
+    "ERROR2": "ERROR. Usuario ya existe",
+    "ERROR3": "SYSTEM ERROR, consulta a tu proveedor"
+  }
+}
