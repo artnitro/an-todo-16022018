@@ -33,13 +33,13 @@ export class Resolvers {
 
   static isUser(args, { errorName }) {
     return Resolvers.user
-      .findOne(args)
+      .findOne(args.isUser)
       .then( user => {
         return (user !== null)
           ? Resolvers.token.getToken({
               id: user.dataValues.uuid,
               email: user.dataValues.email
-            }) 
+            }, 60) 
           : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
@@ -59,7 +59,7 @@ export class Resolvers {
             : Resolvers.token.getToken({
                 id: user.dataValues.uuid,
                 email: user.dataValues.email
-              }); 
+              }, 60); 
       })
       .catch(err => {
         console.log(err);
