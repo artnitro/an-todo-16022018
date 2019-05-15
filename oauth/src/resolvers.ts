@@ -50,7 +50,7 @@ export class Resolvers {
   
   static createUser(args , { errorName }) {
     return Resolvers.user
-      .findOrCreate(args)
+      .findOrCreate(args.cuser)
       .then( user => {
         return (user === null)
           ? (() => { throw new Error(errorName.BAD_REQUEST); })()

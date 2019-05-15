@@ -12,7 +12,7 @@ import { IUser } from './IUser';
 export class UserService implements IUser {
 
   /**
-   * @description It finds an user in database.
+   * @description Find an user in database by the email.
    * @param {object} args
    * @returns object or null.
    */
@@ -34,21 +34,21 @@ export class UserService implements IUser {
   }
 
   /**
-   * @description It creates an user if the user does not exist.
+   * @description Create an user if the user does not exist.
    * @param {object} args
    * @returns object, undefined or null.
    */
   async findOrCreate(args) {
     let salt = bcrypt.genSaltSync(10);
-    args.cuser.password = bcrypt.hashSync(args.cuser.password, salt);
+    args.password = bcrypt.hashSync(args.password, salt);
 
     try {
       let user = await models.User
         .findOrCreate({
           where: {
-            email: args.cuser.email
+            email: args.email
           }, 
-          defaults: args.cuser
+          defaults: args
         })
         .spread( (userData, created) => {
           return (created)  
