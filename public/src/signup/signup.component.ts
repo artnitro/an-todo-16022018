@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, TOKEN, LANGUAGE } from '../app.config';
+import { COLORS, LOCAL, LANGUAGE } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { SignupService } from './signup.service';
@@ -50,7 +50,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     });
-    this.localStorage.clear();
+    this.localStorage.clear(LOCAL.userData);
     this.translate.get('SIGNUP.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
     });
@@ -89,7 +89,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   // TODO:
   saveToken(token: string) {
     console.log('>>> Saving token');
-    this.localStorage.store(TOKEN.tokenName, token);
+    this.localStorage.store(LOCAL.userData, token);
     // Redirect to dashboard.
   }
 

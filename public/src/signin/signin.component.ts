@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, TOKEN } from '../app.config';
+import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { SigninService } from './signin.service';
 
@@ -43,7 +43,7 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
       email: this.email(),
       password: this.password()
     });
-    this.LocalStorage.clear();
+    this.LocalStorage.clear(LOCAL.userData);
     this.translate.get('SIGNIN.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
     });
@@ -79,7 +79,7 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   // TODO: 
   saveToken(token: string) {
     console.log ('>>> Saving token.');
-    this.LocalStorage.store(TOKEN.tokenName, token);
+    this.LocalStorage.store(LOCAL.userData, token);
     // Redirect to dashboard
   }
 

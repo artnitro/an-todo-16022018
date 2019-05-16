@@ -12,8 +12,8 @@ export const SOURCE = {
   connectOauth: 'https://oauth.antodo.local:5000/oauth/v1/'
 }
 
-export const TOKEN = {
-  tokenName: 'an-todo-16022018'
+export const LOCAL = {
+  userData: '16022018-user'
 }
 
 export const LANGUAGE = {
