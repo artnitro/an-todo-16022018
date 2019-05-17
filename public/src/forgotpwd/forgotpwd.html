@@ -13,7 +13,7 @@
           <span class="an-d-block an-txt-left an-txt-s-md">Type your email to set new password</span>
         </div>
       </header>
-      <section>
+      <section *ngIf="show">
         <form [formGroup]="forgotpwdForm" (ngSubmit)="forgotPwd()" novalidate>
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-md">
@@ -33,6 +33,16 @@
             </div>
           </div>
         </form>
+      </section>
+      <section *ngIf="!show">
+        <div class="an-card-box">
+          <div class="an-d-block an-mg-b-lg">
+            <p class=" an-txt-left an-txt-s-md">We just had sending you an email with a link which you will have<br>to click for changing your password.</p>
+          </div>
+          <div class="an-center-h">
+            <button class="an-btn-blue an-btn-sm an-btn-rounded" type="button">continue</button>
+          </div>
+        </div>
       </section>
     </div>
   </div>
