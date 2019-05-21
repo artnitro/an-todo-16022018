@@ -14,5 +14,18 @@
     "ERROR1": "ERROR. Type correctly data",
     "ERROR2": "ERROR. User already exists",
     "ERROR3": "SYSTEM ERROR, consult with your provider"
+  },
+  "FORGOTPWD": {
+    "HEADER1": "Forgot password?",
+    "HEADER2": "Type your email to set new password",
+    "EMAIL": "Email",
+    "STATUS1": "Type correctly data",
+    "STATUS2": "OK. Waiting for server response",
+    "BUTTON1": "Send",
+    "ERROR1": "ERROR. Type correctly data",
+    "ERROR2": "ERROR. User already exists",
+    "ERROR3": "SYSTEM ERROR, consult with your provider",
+    "ANSWER": "We just had sending you an email<br>with a link which you will have<br>to click for resetting your password",
+    "BUTTON2": "Continue"
   }
 }
