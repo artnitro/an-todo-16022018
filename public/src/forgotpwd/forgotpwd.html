@@ -9,8 +9,8 @@
           <figure class="an-mg-b-lg">
             <img src="../../img/logo.png" alt="logotipo">
           </figure>
-          <span class="an-d-block an-txt-left an-txt-s-lg">Forgot password?</span>
-          <span class="an-d-block an-txt-left an-txt-s-md">Type your email to set new password</span>
+          <span class="an-d-block an-txt-left an-txt-s-lg">{{'FORGOTPWD.HEADER1' | translate}}</span>
+          <span class="an-d-block an-txt-left an-txt-s-md">{{'FORGOTPWD.HEADER2' | translate}}</span>
         </div>
       </header>
       <section *ngIf="show">
@@ -18,7 +18,7 @@
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-md">
               <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">Email</label>
+              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'FORGOTPWD.EMAIL' | translate}}</label>
             </div>
             <div class="an-d-block an-mg-b-lg" [ngStyle]="{'color': formMessageColor}">  
               <div class="an-d-inline-block an-blink">
@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="an-center-h">
-              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">send</button>
+              <button class="an-btn-blue an-btn-sm an-btn-rounded" type="submit">{{'FORGOTPWD.BUTTON1' | translate}}</button>
             </div>
           </div>
         </form>
@@ -37,10 +37,10 @@
       <section *ngIf="!show">
         <div class="an-card-box">
           <div class="an-d-block an-mg-b-lg">
-            <p class=" an-txt-left an-txt-s-md">We just had sending you an email with a link which you will have<br>to click for changing your password.</p>
+            <p class=" an-txt-left an-txt-s-md" [innerHTML]="'FORGOTPWD.ANSWER' | translate"></p>
           </div>
           <div class="an-center-h">
-            <button class="an-btn-blue an-btn-sm an-btn-rounded" type="button">continue</button>
+            <button class="an-btn-blue an-btn-sm an-btn-rounded" type="button">{{'FORGOTPWD.BUTTON2' | translate}}</button>
           </div>
         </div>
       </section>
