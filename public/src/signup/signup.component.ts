@@ -74,12 +74,12 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
             .keys(err.graphQLErrors)
             .filter((element) => {
               (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 400)
-                ? this.typingError(COLORS.red, 'SIGNUP.ERROR2')
+                ? this.typingData(COLORS.red, 'SIGNUP.ERROR2')
                 : (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 419)
-                    ? this.typingError(COLORS.red, 'SIGNUP.ERROR1')
+                    ? this.typingData(COLORS.red, 'SIGNUP.ERROR1')
                     : (
                         console.error('>>> The statusCode property is likely not setup.'),
-                        this.typingError(COLORS.red, 'SIGNUP.ERROR3')
+                        this.typingData(COLORS.red, 'SIGNUP.ERROR3')
                       );
             })
         }
@@ -93,7 +93,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     // Redirect to dashboard.
   }
 
-  typingError(colors: string, text: string) {
+  typingData(colors: string, text: string) {
     this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
@@ -101,20 +101,13 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     });
   }
 
-  typingOk(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
-      this.formMessage = res;
-      this.formMessageColor = colors;
-    });
-  }
-
   signup() {
     this.hasError = this.checkFields(this.signupForm);
     (Object.keys(this.hasError).length)
-      ? this.typingError(COLORS.red, 'SIGNUP.ERROR1')
+      ? this.typingData(COLORS.red, 'SIGNUP.ERROR1')
       :
         (
-          this.typingOk(COLORS.black, 'SIGNUP.STATUS2'),
+          this.typingData(COLORS.black, 'SIGNUP.STATUS2'),
           this.sendData()
         )
   }

@@ -66,10 +66,10 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
             .keys(err.graphQLErrors)
             .filter((element) => {
               (err.graphQLErrors[element]['statusCode'] && err.graphQLErrors[element]['statusCode'] === 401)
-                ? this.typingError(COLORS.red, 'SIGNIN.ERROR2')
+                ? this.typingData(COLORS.red, 'SIGNIN.ERROR2')
                 : (
                     console.error('>>> The statusCode property is likely not setup.'),
-                    this.typingError(COLORS.red, 'SIGNIN.ERROR3')
+                    this.typingData(COLORS.red, 'SIGNIN.ERROR3')
                   )
             })
         }
@@ -83,7 +83,7 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
     // Redirect to dashboard
   }
 
-  typingError(colors: string, text: string) {
+  typingData(colors: string, text: string) {
     this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
@@ -91,20 +91,13 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
     });
   }
 
-  typingOk(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
-      this.formMessage = res;
-      this.formMessageColor = colors;
-    });
-  }
-
   signin() {
     this.hasError = this.checkFields(this.signinForm);
     (Object.keys(this.hasError).length)
-      ? this.typingError(COLORS.red, 'SIGNIN.ERROR1')
+      ? this.typingData(COLORS.red, 'SIGNIN.ERROR1')
       :
         (      
-          this.typingOk(COLORS.black, 'SIGNIN.STATUS2'),
+          this.typingData(COLORS.black, 'SIGNIN.STATUS2'),
           this.sendData()
         )
   }
