@@ -2,7 +2,6 @@
  * User service.
  */
 
-import * as bcrypt from 'bcryptjs';
 import { injectable } from 'inversify';
 
 import { models } from '../model/mysql';
@@ -19,7 +18,6 @@ export class UserService implements IUser {
   async findOne(args) {
     let field: object = {};
     (args.email) ? field['email'] = args.email : field['uuid'] = args.uuid;
-
     try {
       let user = await models.User
         .findOne({
