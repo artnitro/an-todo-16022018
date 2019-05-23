@@ -39,9 +39,6 @@ export class UserService implements IUser {
    * @returns object | undefined | null.
    */
   async findOrCreate(args) {
-    let salt = bcrypt.genSaltSync(10);
-    args.password = bcrypt.hashSync(args.password, salt);
-
     try {
       let user = await models.User
         .findOrCreate({

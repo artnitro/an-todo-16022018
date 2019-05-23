@@ -4,6 +4,7 @@
 
 import * as Sequelize from 'sequelize';
 import { sequelize } from './mysql';
+import * as bcrypt from 'bcryptjs';
 
 export default (sequelize, Sequelize) => {
   const User = sequelize.define('user', {
@@ -71,7 +72,13 @@ export default (sequelize, Sequelize) => {
         fields: ['email']
       }
     ],
-    paranoid: true
+    paranoid: true,
+    hooks: {
+      beforeCreate: function(user) {
+        let salt = bcrypt.genSaltSync(10);
+        user.password = bcrypt.hashSync(user.password, salt);
+      }
+    }
   });
   return User;
 }
