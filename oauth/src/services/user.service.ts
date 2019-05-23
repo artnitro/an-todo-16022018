@@ -12,19 +12,20 @@ import { IUser } from './IUser';
 export class UserService implements IUser {
 
   /**
-   * @description Find an user in database by the email.
+   * @description Find an user in database by email or uuid.
    * @param args object
    * @returns object | null
    */
   async findOne(args) {
+    let field: object = {};
+    (args.email) ? field['email'] = args.email : field['uuid'] = args.uuid;
+
     try {
       let user = await models.User
         .findOne({
-          where: {
-            email: args.email,
-          }
+          where: field
         })
-      return ( user !== null && bcrypt.compareSync(args.password, user.dataValues.password) )
+      return ( user !== null )
         ? user
         : (() => { throw new Error('Database error: User does not exist'); })()    
     } catch (err) {

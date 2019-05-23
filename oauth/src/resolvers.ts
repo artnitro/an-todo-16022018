@@ -3,6 +3,7 @@
  */
 
 import { inject, injectable } from 'inversify';
+import * as bcrypt from 'bcryptjs';
 
 import { models } from './model/mysql'; // Remove when I removed the getUser() method.
 import { IUser } from './services/IUser';
@@ -32,10 +33,11 @@ export class Resolvers {
   }
 
   static isUser(args, { errorName }) {
+    let { password } = args.isUser;
     return Resolvers.user
       .findOne(args.isUser)
       .then( user => {
-        return (user !== null)
+        return (user !== null && bcrypt.compareSync(password, user.dataValues.password))
           ? Resolvers.token.getToken({
               id: user.dataValues.uuid,
               email: user.dataValues.email
