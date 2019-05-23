@@ -13,8 +13,8 @@ export class UserService implements IUser {
 
   /**
    * @description Find an user in database by the email.
-   * @param {object} args
-   * @returns object or null.
+   * @param args object
+   * @returns object | null
    */
   async findOne(args) {
     try {
@@ -35,8 +35,8 @@ export class UserService implements IUser {
 
   /**
    * @description Create an user if the user does not exist.
-   * @param {object} args
-   * @returns object, undefined or null.
+   * @param args object
+   * @returns object | undefined | null.
    */
   async findOrCreate(args) {
     let salt = bcrypt.genSaltSync(10);

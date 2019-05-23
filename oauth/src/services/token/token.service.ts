@@ -13,8 +13,8 @@ export class TokenService implements IToken {
 
   /**
    * @description Get token from user data.
-   * @param {object} userData 
-   * @param {number} time 
+   * @param userData object
+   * @param time number seconds
    * @returns string
    */
   getToken(userData: IUserData, time: number): string {

@@ -11,7 +11,7 @@ export abstract class AFields {
 
   /**
    * @description Email validator.
-   * @returns FormControl validators
+   * @returns FormControl validator
    */
   email(): FormControl {
     return new FormControl ('', [
@@ -23,7 +23,7 @@ export abstract class AFields {
 
   /**
    * @description Password validator.
-   * @returns FormControl validators
+   * @returns FormControl validator
    */
   password(): FormControl {
     return new FormControl('', [
@@ -34,7 +34,7 @@ export abstract class AFields {
 
   /**
    * @description Required fields validator.
-   * @returns FormControl validators
+   * @returns FormControl validator
    */
   required(): FormControl {
     return new FormControl ('', [
@@ -44,7 +44,7 @@ export abstract class AFields {
 
   /**
    * @description Get the form field names with error.
-   * @param form: FormGroup type.
+   * @param form FormGroup
    * @returns Object
    */
   checkFields(form: FormGroup): object {
