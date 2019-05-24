@@ -33,9 +33,13 @@ export class Resolvers {
   }
 
   static isUser(args, { errorName }) {
-    let { password } = args.isUser;
+    let
+      email,
+      { password } = args.isUser;
+    const mail = ({ email } = args.isUser, { email });
+
     return Resolvers.user
-      .findOne(args.isUser)
+      .findOne(mail)
       .then( user => {
         return (user !== null && bcrypt.compareSync(password, user.dataValues.password))
           ? Resolvers.token.getToken({

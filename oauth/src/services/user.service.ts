@@ -11,17 +11,15 @@ import { IUser } from './IUser';
 export class UserService implements IUser {
 
   /**
-   * @description Find an user in database by email or uuid.
+   * @description Find an user in database.
    * @param args object
    * @returns object | null
    */
   async findOne(args) {
-    let field: object = {};
-    (args.email) ? field['email'] = args.email : field['uuid'] = args.uuid;
     try {
       let user = await models.User
         .findOne({
-          where: field
+          where: args
         })
       return ( user !== null )
         ? user
