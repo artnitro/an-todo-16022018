@@ -35,9 +35,14 @@ export const schema = buildSchema(`
     password: String!
   }
 
+  input ForgotPwdInput {
+    email: String!
+  }
+
   type Query {
     getUsers: [CUser!]!
     isUser(isUser: IsUserInput): String
+    forgotPwd(forgotPwd: ForgotPwdInput): String
   }
 
   type Mutation {

@@ -35,8 +35,8 @@ export class Resolvers {
   static isUser(args, { errorName }) {
     let
       email,
-      { password } = args.isUser;
-    const mail = ({ email } = args.isUser, { email });
+      { password } = args.isUser,
+      mail = ({ email } = args.isUser, { email });
 
     return Resolvers.user
       .findOne(mail)
@@ -52,6 +52,27 @@ export class Resolvers {
         console.log(err);
         return err;
       });
+  }
+
+  static forgotPwd(args, { errorName }) {
+    let 
+      email,
+      mail = ({ email } = args.forgotPwd, { email });
+
+    return Resolvers.user
+      .findOne(mail)
+      .then( user => {
+        return (user !== null) 
+        // Expira en 30'.
+        ? Resolvers.token.getToken({
+            email: user.dataValues.email
+          }, 1800) 
+        : (() => { throw new Error(errorName.UNAUTHORIZED); })()
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      })
   }
   
   static createUser(args , { errorName }) {
