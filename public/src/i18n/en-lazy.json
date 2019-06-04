@@ -23,9 +23,9 @@
     "STATUS2": "OK. Waiting for server response",
     "BUTTON1": "Send",
     "ERROR1": "ERROR. Type correctly data",
-    "ERROR2": "ERROR. User already exists",
+    "ERROR2": "ERROR. User not exist",
     "ERROR3": "SYSTEM ERROR, consult with your provider",
-    "ANSWER": "We just had sending you an email<br>with a link which you will have<br>to click for resetting your password",
+    "ANSWER": "We'd just sent you an email<br>with a link which you will have<br>to click for resetting your password",
     "BUTTON2": "Continue"
   }
 }

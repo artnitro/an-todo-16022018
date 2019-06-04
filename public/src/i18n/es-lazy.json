@@ -23,7 +23,7 @@
     "STATUS2": "OK. Esperando respuesta del servidor",
     "BUTTON1": "Enviar",
     "ERROR1": "ERROR. Escribe correctamente los datos",
-    "ERROR2": "ERROR. Usuario ya existe",
+    "ERROR2": "ERROR. Usuario no existe",
     "ERROR3": "SYSTEM ERROR, consulta a tu proveedor",
     "ANSWER": "Acabamos de enviarte un email con un enlace<br>en el que tendrás que hacer clic para restablecer<br>su password",
     "BUTTON2": "Continue"
