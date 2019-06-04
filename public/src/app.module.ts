@@ -11,6 +11,7 @@ import { GraphqlModule } from './graphql.module';
 import { TranslateConfigModule } from './translate.config.module';
 import { AppRoutingModule } from './app.routing.module';
 import { SigninModule } from './signin/singin.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 
@@ -26,6 +27,7 @@ import { AppComponent } from './app.component';
 		TranslateConfigModule,
 		AppRoutingModule, 
 		SigninModule,
+		DashboardModule,
 	],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
