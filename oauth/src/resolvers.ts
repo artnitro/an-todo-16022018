@@ -42,10 +42,11 @@ export class Resolvers {
       .findOne(mail)
       .then( user => {
         return (user !== null && bcrypt.compareSync(password, user.dataValues.password))
+          // Expira en 7 días.
           ? Resolvers.token.getToken({
               id: user.dataValues.uuid,
               email: user.dataValues.email
-            }, 60) 
+            }, 604800) 
           : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
