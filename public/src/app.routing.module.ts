@@ -26,6 +26,10 @@ const routes: Routes = [
     loadChildren: './signup/signup.module#SignupModule'
   },
   {
+    path: 'changepwd',
+    loadChildren: './changepwd/changepwd.module#ChangepwdModule'
+  },
+  {
     path: '',
     redirectTo: 'signin',
     pathMatch: 'full'
