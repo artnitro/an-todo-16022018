@@ -4,6 +4,7 @@
 
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -32,7 +33,8 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
     private fb: FormBuilder, 
     private signinService: SigninService,
     private LocalStorage: LocalStorageService, 
-    public translate: TranslateService
+    public translate: TranslateService,
+    private router: Router,
   ) {
     super(); 
     console.info('>>>>> Signin component.');
@@ -75,11 +77,10 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
       );
   }
 
-  // TODO: 
   saveToken(token: string) {
     console.log ('>>> Saving token.');
     this.LocalStorage.store(LOCAL.userData, token);
-    // Redirect to dashboard
+    this.router.navigate(['/dashboard']);
   }
 
   typingData(colors: string, text: string) {
