@@ -47,7 +47,6 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
     this.forgotpwdForm = this.fb.group({
       email: this.email(),
     });
-    this.LocalStorage.clear(LOCAL.forgotPwd);
     this.translate.get('FORGOTPWD.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
     });
