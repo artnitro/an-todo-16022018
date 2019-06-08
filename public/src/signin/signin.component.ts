@@ -43,7 +43,6 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
       email: this.email(),
       password: this.password()
     });
-    this.LocalStorage.clear(LOCAL.userData);
     this.translate.get('SIGNIN.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
     });

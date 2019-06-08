@@ -50,7 +50,6 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     });
-    this.localStorage.clear(LOCAL.userData);
     this.translate.get('SIGNUP.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
     });
