@@ -2,7 +2,14 @@
  * Change password component.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+import { LOCAL } from '../app.config';
+
+const JWT = new JwtHelperService();
 
 @Component({
   selector: 'changepwd',
@@ -11,8 +18,22 @@ import { Component } from '@angular/core';
 
 export class ChangepwdComponent {
 
-  constructor() {
+  token: string;
+  decodedToken: object;
+
+  constructor(
+    private router: Router,
+    private localStorage: LocalStorageService
+  ) {
     console.info('>>>>> Changepwd component.');
+    this.token = this.localStorage.retrieve(LOCAL.forgotPwd);
+    this.decodedToken = JWT.decodeToken(this.token);
+  }
+
+  ngOnInit() {
+    if ( this.token === null || JWT.isTokenExpired(this.token) ) {
+      this.router.navigate(['/signin']);
+    }
   }
 
 }
