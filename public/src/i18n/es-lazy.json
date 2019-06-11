@@ -27,5 +27,16 @@
     "ERROR3": "SYSTEM ERROR, consulta a tu proveedor",
     "ANSWER": "Acabamos de enviarte un email con un enlace<br>en el que tendrás que hacer clic para restablecer<br>su password",
     "BUTTON2": "Continue"
+  },
+  "CHANGEPWD": {
+    "HEADER1": "Reinicia tu password",
+    "HEADER2": "para continuar en la app",
+    "PASSWORD": "Password",
+    "CONFIRM": "Confirma password",
+    "STATUS1": "Escribe correctamente los datos",
+    "STATUS2": "OK. Esperando respuesta del servidor",
+    "BUTTON": "Enviar",
+    "ERROR1": "ERROR. Escribe correctamente los datos",
+    "ERROR3": "SYSTEM ERROR, consulta a tu proveedor"
   }
 }

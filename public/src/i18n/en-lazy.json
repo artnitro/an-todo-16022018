@@ -27,5 +27,16 @@
     "ERROR3": "SYSTEM ERROR, consult with your provider",
     "ANSWER": "We'd just sent you an email<br>with a link which you will have<br>to click for resetting your password",
     "BUTTON2": "Continue"
+  },
+  "CHANGEPWD": {
+    "HEADER1": "Reset your password",
+    "HEADER2": "to continue to app",
+    "PASSWORD": "Password",
+    "CONFIRM": "Confirm password",
+    "STATUS1": "Type correctly data",
+    "STATUS2": "OK. Waiting for server response",
+    "BUTTON": "Send",
+    "ERROR1": "ERROR. Type correctly data",
+    "ERROR3": "SYSTEM ERROR, consult with your provider"
   }
 }
