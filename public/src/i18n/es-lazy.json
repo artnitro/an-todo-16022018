@@ -26,7 +26,7 @@
     "ERROR2": "ERROR. Usuario no existe",
     "ERROR3": "SYSTEM ERROR, consulta a tu proveedor",
     "ANSWER": "Acabamos de enviarte un email con un enlace<br>en el que tendrás que hacer clic para restablecer<br>su password",
-    "BUTTON2": "Continue"
+    "BUTTON2": "Continuar"
   },
   "CHANGEPWD": {
     "HEADER1": "Reinicia tu password",
@@ -37,6 +37,8 @@
     "STATUS2": "OK. Esperando respuesta del servidor",
     "BUTTON": "Enviar",
     "ERROR1": "ERROR. Escribe correctamente los datos",
-    "ERROR3": "SYSTEM ERROR, consulta a tu proveedor"
+    "ERROR3": "SYSTEM ERROR, consulta a tu proveedor",
+    "ANSWER": "Tu paswword se ha modificado satisfactoriamente",
+    "BUTTON2": "Continuar"
   }
 }

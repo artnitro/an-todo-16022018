@@ -37,6 +37,8 @@
     "STATUS2": "OK. Waiting for server response",
     "BUTTON": "Send",
     "ERROR1": "ERROR. Type correctly data",
-    "ERROR3": "SYSTEM ERROR, consult with your provider"
+    "ERROR3": "SYSTEM ERROR, consult with your provider",
+    "ANSWER": "Your password has been changed<br>successfully",
+    "BUTTON2": "Continue"
   }
 }
