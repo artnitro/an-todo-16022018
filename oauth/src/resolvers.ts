@@ -31,7 +31,6 @@ export class Resolvers {
         return users
       });
   }
-
   static isUser(args, { errorName }) {
     let
       email,
@@ -75,7 +74,28 @@ export class Resolvers {
         return err;
       })
   }
+
+  static changePwd(args, { errorName }) {
+    let 
+      email,
+      mail = ({ email } = args.changePwd, { email }),
+      salt = bcrypt.genSaltSync(10);
+
+    args.changePwd.password = bcrypt.hashSync(args.changePwd.password, salt);
+    return Resolvers.user
+      .update(args.changePwd, mail)
+      .then( user => {
+        return (user) 
+          ? true
+          : (() => { throw new Error(errorName.BAD_REQUEST); })()
+      })
+      .catch( err => {
+        console.log(err);
+        return err;
+      })
+  }
   
+  //TODO: Pasar parámetro find para indicar por lo que se va a buscar.
   static createUser(args , { errorName }) {
     return Resolvers.user
       .findOrCreate(args.cuser)

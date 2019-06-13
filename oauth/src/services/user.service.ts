@@ -12,14 +12,14 @@ export class UserService implements IUser {
 
   /**
    * @description Find an user in database.
-   * @param args object
+   * @param find object
    * @returns object | null
    */
-  async findOne(args) {
+  async findOne(find) {
     try {
       let user = await models.User
         .findOne({
-          where: args
+          where: find
         })
       return ( user !== null )
         ? user
@@ -56,4 +56,25 @@ export class UserService implements IUser {
     }
   }
 
+  /**
+   * @description Update one or several columns.
+   * @param cols object
+   * @param find object
+   */
+  async update(cols, find) {
+    try {
+      let user = await models.User
+        .update(
+          cols,
+          {
+            where: find
+        });
+      return (user[0] > 0 )
+        ? true 
+        : (() => { throw new Error('Database error: Error updating data') })()
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
 }
