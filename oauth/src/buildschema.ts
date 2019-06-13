@@ -39,6 +39,11 @@ export const schema = buildSchema(`
     email: String!
   }
 
+  input ChangepwdInput {
+    email: String!
+    password: String!
+  }
+
   type Query {
     getUsers: [CUser!]!
     isUser(isUser: IsUserInput): String
@@ -47,5 +52,6 @@ export const schema = buildSchema(`
 
   type Mutation {
     createUser(cuser: CUserInput): String
+    changePwd(changePwd: ChangepwdInput): Boolean
   }
 `);
