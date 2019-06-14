@@ -60,6 +60,7 @@ export class UserService implements IUser {
    * @description Update one or several columns.
    * @param cols object
    * @param find object
+   * @returns boolean
    */
   async update(cols, find) {
     try {
