@@ -3,5 +3,5 @@
  */
 
  export interface IFindOrCreate {
-   findOrCreate(args): Promise<any>;
+   findOrCreate(args, find): Promise<any>;
  }

@@ -31,6 +31,7 @@ export class Resolvers {
         return users
       });
   }
+  
   static isUser(args, { errorName }) {
     let
       email,
@@ -95,19 +96,23 @@ export class Resolvers {
       })
   }
   
-  //TODO: Pasar parámetro find para indicar por lo que se va a buscar.
   static createUser(args , { errorName }) {
+    let 
+      email,
+      mail = ({ email } = args.cuser, { email });
+
     return Resolvers.user
-      .findOrCreate(args.cuser)
+      .findOrCreate(args.cuser, mail)
       .then( user => {
         return (user === null)
           ? (() => { throw new Error(errorName.BAD_REQUEST); })()
           : (user === undefined)
             ? (() => { throw new Error(errorName.UNVALIDATED); })()
+            // Expira en 7 días.
             : Resolvers.token.getToken({
                 id: user.dataValues.uuid,
                 email: user.dataValues.email
-              }, 60); 
+              }, 604800); 
       })
       .catch(err => {
         console.log(err);

@@ -33,15 +33,14 @@ export class UserService implements IUser {
   /**
    * @description Create an user if the user does not exist.
    * @param args object
+   * @param find object
    * @returns object | undefined | null.
    */
-  async findOrCreate(args) {
+  async findOrCreate(args, find) {
     try {
       let user = await models.User
         .findOrCreate({
-          where: {
-            email: args.email
-          }, 
+          where: find, 
           defaults: args
         })
         .spread( (userData, created) => {
