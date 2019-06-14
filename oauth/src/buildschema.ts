@@ -25,11 +25,6 @@ export const schema = buildSchema(`
     password: String
   }
 
-  type IsUser {
-    email: String!
-    password: String!
-  }
-
   input IsUserInput {
     email: String!
     password: String!
