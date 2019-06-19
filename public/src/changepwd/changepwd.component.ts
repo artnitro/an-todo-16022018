@@ -2,7 +2,7 @@
  * Change password component.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -23,7 +23,7 @@ const JWT = new JwtHelperService();
   templateUrl: './changepwd.html'
 })
 
-export class ChangepwdComponent extends AFields implements OnInit {
+export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
 
   changepwdForm: FormGroup;
 
@@ -114,6 +114,10 @@ export class ChangepwdComponent extends AFields implements OnInit {
 
   changeContinue() {
     this.router.navigate(['/signin']);
+  }
+
+  ngOnDestroy() {
+    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
   }
 
 }
