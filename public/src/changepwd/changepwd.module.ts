@@ -13,6 +13,7 @@ import { MessageModule } from '../components/message/message.module';
 import { TranslateLazyConfigModule } from '../translate.lazy.config.module';
 
 import { ChangepwdComponent } from './changepwd.component';
+import { ChangepwdService } from './changepwd.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ChangepwdComponent } from './changepwd.component';
     RoutingModule,
     MessageModule
   ],
+  providers: [ChangepwdService],
   declarations: [ChangepwdComponent],
 })
 
