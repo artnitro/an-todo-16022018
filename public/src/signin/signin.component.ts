@@ -9,10 +9,13 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { SigninService } from './signin.service';
+
+const JWT = new JwtHelperService();
 
 @Component({
   selector: 'signin',
@@ -28,6 +31,7 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   formColor: string;
   formMessage: string; 
   formMessageColor: string;
+  token: string;
   
   constructor(
     private fb: FormBuilder, 
@@ -38,9 +42,13 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   ) {
     super(); 
     console.info('>>>>> Signin component.');
+    this.token = this.LocalStorage.retrieve(LOCAL.userData);
   }
 
   ngOnInit() {
+    if ( this.token !== null && !JWT.isTokenExpired(this.token) ) {
+      this.router.navigate(['/dashboard']);
+    }
     this.signinForm = this.fb.group({
       email: this.email(),
       password: this.password()
