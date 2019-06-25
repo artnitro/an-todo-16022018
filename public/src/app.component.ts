@@ -4,8 +4,9 @@
 
 import { Component, Renderer2, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'ngx-webstorage';
 
-import { LANGUAGE } from './app.config';
+import { LOCAL } from './app.config';
 
 @Component({
 	selector: 'an-todo-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
 
 	constructor( 
 		private renderer: Renderer2,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private localStorage: LocalStorageService
 	) {}
 
 	ngOnInit() {
@@ -28,6 +30,6 @@ export class AppComponent implements OnInit {
 
 		// Setup language
 
-		this.translate.setDefaultLang(LANGUAGE.defaultLanguage);
+		this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
 	}
 }
