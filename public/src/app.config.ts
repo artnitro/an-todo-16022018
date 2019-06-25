@@ -14,7 +14,8 @@ export const SOURCE = {
 
 export const LOCAL = {
   userData: '16022018-user',
-  forgotPwd: '16022018-forgotpwd'
+  forgotPwd: '16022018-forgotpwd',
+  language: '16022018-language'
 }
 
 export const LANGUAGE = {
