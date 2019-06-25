@@ -3,7 +3,7 @@
 */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
@@ -14,6 +14,13 @@ import { SigninModule } from './signin/singin.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
+import { AppService } from './app.service';
+
+export function initializeAppFactory( appService: AppService ) {
+	return (): Promise<any> => {
+		return appService.init();
+	}
+}
 
 @NgModule({
 	imports: [
@@ -28,6 +35,10 @@ import { AppComponent } from './app.component';
 		AppRoutingModule, 
 		SigninModule,
 		DashboardModule,
+	],
+	providers: [
+		AppService,
+		{ provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AppService], multi: true }
 	],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
