@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, LOCAL, LANGUAGE } from '../app.config';
+import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { SignupService } from './signup.service';
@@ -39,7 +39,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   ) {
     super();
     console.info('>>>>> Signup component.');
-    this.translate.setDefaultLang(LANGUAGE.defaultLanguage);
+    this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
   }
 
   ngOnInit() {

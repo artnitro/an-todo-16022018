@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, LANGUAGE, LOCAL } from '../app.config';
+import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ForgotpwdService } from './forgotpwd.service';
 
@@ -40,7 +40,7 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
   ) {
     super();
     console.info('>>>>> Forgotpwd component.');
-    this.translate.setDefaultLang(LANGUAGE.defaultLanguage);
+    this.translate.setDefaultLang(this.LocalStorage.retrieve(LOCAL.language));
   }
 
   ngOnInit() {

@@ -11,7 +11,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
 
-import { COLORS, LOCAL, LANGUAGE } from '../app.config';
+import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { ChangepwdService } from './changepwd.service';
@@ -45,7 +45,7 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
   ) {
     super();
     console.info('>>>>> Changepwd component.');
-    this.translate.setDefaultLang(LANGUAGE.defaultLanguage);
+    this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
     this.token = this.localStorage.retrieve(LOCAL.forgotPwd);
   }
 
