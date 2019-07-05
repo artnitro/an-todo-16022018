@@ -42,10 +42,10 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   ) {
     super(); 
     console.info('>>>>> Signin component.');
-    this.token = this.LocalStorage.retrieve(LOCAL.userData);
   }
 
   ngOnInit() {
+    this.token = this.LocalStorage.retrieve(LOCAL.userData);
     if ( this.token !== null && !JWT.isTokenExpired(this.token) ) {
       this.router.navigate(['/dashboard']);
     }

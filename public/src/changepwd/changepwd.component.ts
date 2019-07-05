@@ -46,10 +46,10 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
     super();
     console.info('>>>>> Changepwd component.');
     this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
-    this.token = this.localStorage.retrieve(LOCAL.forgotPwd);
   }
 
   ngOnInit() {
+    this.token = this.localStorage.retrieve(LOCAL.forgotPwd);
     this.decodedToken = ( this.token === null || JWT.isTokenExpired(this.token) )
       ? (() => { this.router.navigate(['/signin']); })()
       : JWT.decodeToken(this.token);
