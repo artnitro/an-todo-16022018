@@ -17,12 +17,14 @@
         <form [formGroup]="signinForm" (ngSubmit)="signin()" novalidate>
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-sm">
-              <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'SIGNIN.EMAIL' | translate}}</label>
+              <an-input [name]="'email'" [color]="hasError['email'] ? formColor : null" [text]="'SIGNIN.EMAIL' | translate">  
+                <input type="text" name="email" id="email" formControlName="email" autocomplete="off" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" required>
+              </an-input>
             </div>
             <div class="an-d-block an-mg-b-md">
-              <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
-              <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">{{'SIGNIN.PASSWORD' | translate}}</label>
+              <an-input [name]="'password'" [color]="hasError['password'] ? formColor : null" [text]="'SIGNIN.PASSWORD' | translate">
+                <input type="password" name="password" id="password" formControlName="password" autocomplete="off" [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" required>
+              </an-input>
             </div>
             <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
               <div class="an-d-inline-block an-blink">

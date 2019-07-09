@@ -9,6 +9,7 @@ import { CommonModule} from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MessageModule } from '../components/message/message.module';
+import { InputModule } from '../components/input/input.module';
 import { SigninComponent } from './signin.component';
 import { SigninService } from './signin.service';
 
@@ -19,6 +20,7 @@ import { SigninService } from './signin.service';
     CommonModule,
     TranslateModule,
     MessageModule,
+    InputModule,
   ],
   providers: [SigninService],
   declarations: [SigninComponent],
