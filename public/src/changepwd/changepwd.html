@@ -18,12 +18,14 @@
         <form [formGroup]="changepwdForm" (ngSubmit)="changepwd()" novalidate>
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-sm">
-              <input type="password" name="password" id="password" formControlName="password"  [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" autocomplete="off" required>
-              <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">{{'CHANGEPWD.PASSWORD' | translate}}</label>
+              <an-input [name]="'password'" [color]="hasError['password'] ? formColor : null" [text]="'CHANGEPWD.PASSWORD' | translate">
+                <input type="password" name="password" id="password" formControlName="password"  [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" autocomplete="off" required>
+              </an-input>
             </div>
             <div class="an-d-block an-mg-b-md">
+              <an-input [name]="'confirmPassword'" [color]="hasError['confirmPassword'] ? formColor : null" [text]="'CHANGEPWD.CONFIRM' | translate">
                 <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [ngStyle]="{'border-color': hasError['confirmPassword'] ? formColor : null}" autocomplete="off" required>
-                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['confirmPassword'] ? formColor : null}">{{'CHANGEPWD.CONFIRM' | translate}}</label>
+              </an-input>
             </div>
             <div class="an-d-block an-mg-b-lg" [ngStyle]="{'color': formMessageColor}">  
               <div class="an-d-inline-block an-blink">

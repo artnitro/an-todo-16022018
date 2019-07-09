@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RoutingModule } from './changepwd.routing';
 import { MessageModule } from '../components/message/message.module';
+import { InputModule } from '../components/input/input.module';
 import { TranslateLazyConfigModule } from '../translate.lazy.config.module';
 
 import { ChangepwdComponent } from './changepwd.component';
@@ -23,7 +24,8 @@ import { ChangepwdService } from './changepwd.service';
     TranslateModule,
     TranslateLazyConfigModule,
     RoutingModule,
-    MessageModule
+    MessageModule, 
+    InputModule
   ],
   providers: [ChangepwdService],
   declarations: [ChangepwdComponent],
