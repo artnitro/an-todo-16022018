@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RoutingModule } from './forgotpwd.routing';
 import { MessageModule } from '../components/message/message.module';
+import { InputModule } from '../components/input/input.module';
 import { TranslateLazyConfigModule } from '../translate.lazy.config.module';
 
 import { ForgotpwdComponent} from './forgotpwd.component';
@@ -23,7 +24,8 @@ import { ForgotpwdService } from './forgotpwd.service';
     TranslateModule,
     TranslateLazyConfigModule, 
     RoutingModule,
-    MessageModule
+    MessageModule, 
+    InputModule
   ],
   providers: [ForgotpwdService],
   declarations: [ForgotpwdComponent],

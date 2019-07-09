@@ -17,8 +17,9 @@
         <form [formGroup]="forgotpwdForm" (ngSubmit)="forgotPwd()" novalidate>
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-md">
-              <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'FORGOTPWD.EMAIL' | translate}}</label>
+              <an-input [name]="'email'" [color]="hasError['email'] ? formColor : null" [text]="'FORGOTPWD.EMAIL' | translate">
+                <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
+              </an-input>
             </div>
             <div class="an-d-block an-mg-b-lg" [ngStyle]="{'color': formMessageColor}">  
               <div class="an-d-inline-block an-blink">
