@@ -51,7 +51,7 @@ export class UserService implements IUser {
       return user;
     } catch (err) {
       console.log(err);
-      return (err.name === 'SequelizeValidationError') ? undefined : null;
+      return (err.name === 'SequelizeValidationError' || err.name === 'SequelizeDatabaseError') ? undefined : null;
     }
   }
 
