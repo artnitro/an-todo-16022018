@@ -10,6 +10,30 @@ export abstract class AFields {
   constructor() {}
 
   /**
+   * @description First name validator.
+   * @returns FormControl validator
+   */
+  firstName() {
+    return new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.max(15)
+    ]);
+  }
+
+  /**
+   * @description Last name validators.
+   * @returns FormControl validator
+   */
+  lastName() {
+    return new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.max(30)
+    ]);
+  }
+
+  /**
    * @description Email validator.
    * @returns FormControl validator
    */
@@ -17,6 +41,7 @@ export abstract class AFields {
     return new FormControl ('', [
       Validators.required,
       Validators.minLength(6),
+      Validators.max(40),
       Validators.email
     ]);
   }

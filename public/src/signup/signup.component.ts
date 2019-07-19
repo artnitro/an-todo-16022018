@@ -44,8 +44,8 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signupForm = this.fb.group({
-      firstName: this.required(),
-      lastName: this.required(),
+      firstName: this.firstName(),
+      lastName: this.lastName(),
       email: this.email(),
       password: this.password(),
       confirmPassword: ['']
