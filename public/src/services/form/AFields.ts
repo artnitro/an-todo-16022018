@@ -41,7 +41,7 @@ export abstract class AFields {
     return new FormControl ('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.max(40),
+      Validators.email,
       Validators.maxLength(40)
     ]);
   }
