@@ -17,7 +17,7 @@ export abstract class AFields {
     return new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.max(15)
+      Validators.maxLength(15)
     ]);
   }
 
@@ -29,7 +29,7 @@ export abstract class AFields {
     return new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.max(30)
+      Validators.maxLength(30)
     ]);
   }
 
@@ -42,7 +42,7 @@ export abstract class AFields {
       Validators.required,
       Validators.minLength(6),
       Validators.max(40),
-      Validators.email
+      Validators.maxLength(40)
     ]);
   }
 
