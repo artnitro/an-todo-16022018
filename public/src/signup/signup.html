@@ -18,26 +18,31 @@
           <div class="an-card-box">
             <div class="an-d-block an-mg-b-sm">
               <div class="an-d-inline-block an-mg-r-lg">
-                <input type="text" name="firstName" id="firstName" formControlName="firstName"  [ngStyle]="{'border-color': hasError['firstName'] ? formColor : null}" autocomplete="off" required>
-                <label for="firstName" class="an-mg-b-n" [ngStyle]="{'color': hasError['firstName'] ? formColor : null}">{{'SIGNUP.FIRST' | translate}}</label>
+                <an-input [name]="'firstName'" [color]="hasError['firstName'] ? formColor : null" [text]="'SIGNUP.FIRST' | translate">
+                  <input type="text" name="firstName" id="firstName" formControlName="firstName"  [ngStyle]="{'border-color': hasError['firstName'] ? formColor : null}" autocomplete="off" required>
+                </an-input>
               </div>
               <div class="an-d-inline-block">
-                <input type="text" name="lastName" id="lastName" formControlName="lastName"  [ngStyle]="{'border-color': hasError['lastName'] ? formColor : null}" autocomplete="off" required>
-                <label for="lastName" class="an-mg-b-n" [ngStyle]="{'color': hasError['lastName'] ? formColor : null}">{{'SIGNUP.LAST' | translate}}</label>
+                <an-input [name]="'lastName'" [color]="hasError['lastName'] ? formColor : null" [text]="'SIGNUP.LAST' | translate">
+                  <input type="text" name="lastName" id="lastName" formControlName="lastName"  [ngStyle]="{'border-color': hasError['lastName'] ? formColor : null}" autocomplete="off" required>
+                </an-input>
               </div>
             </div>
             <div class="an-d-block an-mg-b-sm">
-              <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
-              <label for="email" class="an-mg-b-n" [ngStyle]="{'color': hasError['email'] ? formColor : null}">{{'SIGNUP.EMAIL' | translate}}</label>
+              <an-input [name]="'email'" [color]="hasError['email'] ? formColor : null" [text]="'SIGNUP.EMAIL' | translate">
+                <input type="text" name="email" id="email" formControlName="email" [ngStyle]="{'border-color': hasError['email'] ? formColor : null}" autocomplete="off" required>
+              </an-input>
             </div>
             <div class="an-d-block an-mg-b-md">
               <div class="an-d-inline-block an-mg-r-lg">
-                <input type="password" name="password" id="password" formControlName="password"  [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" autocomplete="off" required>
-                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['password'] ? formColor : null}">{{'SIGNUP.PASSWORD' | translate}}</label>
+                <an-input [name]="'password'" [color]="hasError['password'] ? formColor : null" [text]="'SIGNUP.PASSWORD' | translate">
+                  <input type="password" name="password" id="password" formControlName="password"  [ngStyle]="{'border-color': hasError['password'] ? formColor : null}" autocomplete="off" required>
+                </an-input>
               </div>
               <div class="an-d-inline-block">
-                <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [ngStyle]="{'border-color': hasError['confirmPassword'] ? formColor : null}" autocomplete="off" required>
-                <label for="password" class="an-mg-b-n" [ngStyle]="{'color': hasError['confirmPassword'] ? formColor : null}">{{'SIGNUP.CONFIRM' | translate}}</label>
+                <an-input [name]="'confirmPassword'" [color]="hasError['confirmPassword'] ? formColor : null" [text]="'SIGNUP.CONFIRM' | translate">
+                  <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [ngStyle]="{'border-color': hasError['confirmPassword'] ? formColor : null}" autocomplete="off" required>
+                </an-input>
               </div>
             </div>
             <div class="an-d-block" [ngStyle]="{'color': formMessageColor}">  
