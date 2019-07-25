@@ -32,21 +32,35 @@ export class Resolvers {
       });
   }
   
-  static isUser(args, { errorName }) {
+  static isUser(args, { errorName, req, res }) {
     let
       email,
       { password } = args.isUser,
       mail = ({ email } = args.isUser, { email });
 
+    // res.cookie('refresh', 'ValorDeRefrecoToken', {
+    //   // domain: 'oauth.antodo.local',
+    //   domain: 'antodo.local',
+    //   // expires: new Date(Date.now() + 604800),
+    //   maxAge: 604800000, // en MILISEGUNDOS
+    //   // path: '/oauth/v1/',
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: 'strict'
+    // });
+
+    // // console.log('>>>> REPONSE', res);
+
+    // console.log('>>>>>> COOKIES', req.cookies);
+
     return Resolvers.user
       .findOne(mail)
       .then( user => {
         return (user !== null && bcrypt.compareSync(password, user.dataValues.password))
-          // Expira en 7 días.
           ? Resolvers.token.getToken({
-              id: user.dataValues.uuid,
-              email: user.dataValues.email
-            }, 604800) 
+              email: user.dataValues.email,
+              firstName: user.dataValues.firstName
+            }, parseInt(process.env.TOKEN_LIFE)) 
           : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
@@ -63,11 +77,10 @@ export class Resolvers {
     return Resolvers.user
       .findOne(mail)
       .then( user => {
-        return (user !== null) 
-        // Expira en 30'.
+        return (user !== null)
         ? Resolvers.token.getToken({
             email: user.dataValues.email
-          }, 1800) 
+          }, parseInt(process.env.FORGOT_LIFE)) 
         : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
@@ -108,11 +121,10 @@ export class Resolvers {
           ? (() => { throw new Error(errorName.BAD_REQUEST); })()
           : (user === undefined)
             ? (() => { throw new Error(errorName.UNVALIDATED); })()
-            // Expira en 7 días.
             : Resolvers.token.getToken({
-                id: user.dataValues.uuid,
-                email: user.dataValues.email
-              }, 604800); 
+                email: user.dataValues.email,
+                firstName: user.dataValues.firstName
+              }, parseInt(process.env.TOKEN_LIFE)); 
       })
       .catch(err => {
         console.log(err);
