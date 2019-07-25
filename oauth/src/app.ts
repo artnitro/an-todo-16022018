@@ -4,6 +4,7 @@
 
 import * as http from 'http';
 import * as express from 'express';
+import * as cookieParser from 'cookie-parser';
 
 import { models, sequelize } from './model/mysql';
 import { Router } from './router';
@@ -23,6 +24,7 @@ class App {
   }
 
   private initMiddleware() {
+    this.app.use(cookieParser());
     this.app.use(this.router);
     this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction)  => {
       (err.code === 'ENOENT')

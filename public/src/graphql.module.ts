@@ -17,7 +17,10 @@ import { SOURCE } from './app.config';
 export class GraphqlModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
 		apollo.create({
-      link: httpLink.create({uri: SOURCE.connectOauth}),
+      link: httpLink.create({
+        uri: SOURCE.connectOauth,
+        withCredentials: true
+      }),
 			cache: new InMemoryCache()
     }, 'oauth');
   }
