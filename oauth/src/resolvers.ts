@@ -32,41 +32,39 @@ export class Resolvers {
       });
   }
   
-  static isUser(args, { errorName, req, res }) {
+  static isUser(args, { errorName, res }) {
     let
       email,
+      token,
       { password } = args.isUser,
       mail = ({ email } = args.isUser, { email });
 
-    // res.cookie('refresh', 'ValorDeRefrecoToken', {
-    //   // domain: 'oauth.antodo.local',
-    //   domain: 'antodo.local',
-    //   // expires: new Date(Date.now() + 604800),
-    //   maxAge: 604800000, // en MILISEGUNDOS
-    //   // path: '/oauth/v1/',
-    //   httpOnly: true,
-    //   secure: true,
-    //   sameSite: 'strict'
-    // });
-
-    // // console.log('>>>> REPONSE', res);
-
-    // console.log('>>>>>> COOKIES', req.cookies);
-
-    return Resolvers.user
+    token = Resolvers.user
       .findOne(mail)
       .then( user => {
-        return (user !== null && bcrypt.compareSync(password, user.dataValues.password))
-          ? Resolvers.token.getToken({
-              email: user.dataValues.email,
-              firstName: user.dataValues.firstName
-            }, parseInt(process.env.TOKEN_LIFE, 10)) 
-          : (() => { throw new Error(errorName.UNAUTHORIZED); })()
+        if ( user !== null && bcrypt.compareSync(password, user.dataValues.password) ) {
+          res.cookie('refresh-token', user.dataValues.uuid, {
+            domain: 'antodo.local',
+            maxAge: parseInt(process.env.REFRESH_TOKEN,10), 
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+          });
+          return  Resolvers.token.getToken({
+                    email: user.dataValues.email,
+                    firstName: user.dataValues.firstName
+                  }, parseInt(process.env.TOKEN_LIFE, 10));
+
+        } else {
+          throw new Error(errorName.UNAUTHORIZED);
+        }
       })
       .catch(err => {
         console.log(err);
         return err;
       });
+
+      return token;
   }
 
   static forgotPwd(args, { errorName }) {
@@ -109,27 +107,44 @@ export class Resolvers {
       })
   }
   
-  static createUser(args , { errorName }) {
+  static createUser(args , { errorName, res }) {
     let 
       email,
+      token,
       mail = ({ email } = args.cuser, { email });
 
-    return Resolvers.user
+    token = Resolvers.user
       .findOrCreate(args.cuser, mail)
-      .then( user => {
-        return (user === null)
-          ? (() => { throw new Error(errorName.BAD_REQUEST); })()
-          : (user === undefined)
-            ? (() => { throw new Error(errorName.UNVALIDATED); })()
-            : Resolvers.token.getToken({
-                email: user.dataValues.email,
-                firstName: user.dataValues.firstName
-              }, parseInt(process.env.TOKEN_LIFE, 10)); 
+      .then( user => { 
+        if ( user === null ) {
+          throw new Error(errorName.BAD_REQUEST);
+        } else if ( user === undefined ) {
+          throw new Error(errorName.UNVALIDATED);
+        } else {
+          res.cookie('refresh-token', user.dataValues.uuid, {
+            domain: 'antodo.local',
+            maxAge: parseInt(process.env.REFRESH_TOKEN,10), 
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+          });
+          return  Resolvers.token.getToken({
+                    email: user.dataValues.email,
+                    firstName: user.dataValues.firstName
+                  }, parseInt(process.env.TOKEN_LIFE, 10)); 
+        }
       })
       .catch(err => {
         console.log(err);
         return err;
       });
-  }
 
+      return token;
+  }
+  // TODO: Crear servicio para la creación de Cookies.
+  // TODO: Crear conexión con Redis para grabar refresh-token en database junto con expiresIn para tener control sobre cuando expiran.
+  // TODO: Tener en cuenta que tengo que comprobar refresh-token recibido con refresh-token almacenado como validación.
+  // TODO: Crear servicio que controle cada cierto tiempo, cuando establezca el expiresIn definitivo de refresh-token y token_life, la eliminación items caducados de Redis.
+  // TODO: Establecer expiresIN definitivos para token_life y refresh_token.
+  // TODO: Obviamente tendré que hacer el método para refresh-token.
 }
