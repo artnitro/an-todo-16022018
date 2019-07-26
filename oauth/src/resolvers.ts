@@ -60,7 +60,7 @@ export class Resolvers {
           ? Resolvers.token.getToken({
               email: user.dataValues.email,
               firstName: user.dataValues.firstName
-            }, parseInt(process.env.TOKEN_LIFE)) 
+            }, parseInt(process.env.TOKEN_LIFE, 10)) 
           : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
@@ -80,7 +80,7 @@ export class Resolvers {
         return (user !== null)
         ? Resolvers.token.getToken({
             email: user.dataValues.email
-          }, parseInt(process.env.FORGOT_LIFE)) 
+          }, parseInt(process.env.FORGOT_LIFE, 10)) 
         : (() => { throw new Error(errorName.UNAUTHORIZED); })()
       })
       .catch(err => {
@@ -124,7 +124,7 @@ export class Resolvers {
             : Resolvers.token.getToken({
                 email: user.dataValues.email,
                 firstName: user.dataValues.firstName
-              }, parseInt(process.env.TOKEN_LIFE)); 
+              }, parseInt(process.env.TOKEN_LIFE, 10)); 
       })
       .catch(err => {
         console.log(err);
