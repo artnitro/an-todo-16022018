@@ -8,6 +8,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { AuthGuard } from './auth/auth.guard';
+
 const routes: Routes = [
   {
     path: 'signin',
@@ -15,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'forgotpwd',
