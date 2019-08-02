@@ -7,7 +7,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 
 import { LOCAL, LANGUAGE } from './app.config';
 
-@Injectable() 
+@Injectable({
+  providedIn: 'root'
+}) 
 export class AppService {
 
   constructor(
@@ -23,4 +25,3 @@ export class AppService {
     });
   }
 }
-
