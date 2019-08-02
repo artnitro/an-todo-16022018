@@ -12,6 +12,7 @@ import { TranslateConfigModule } from './translate.config.module';
 import { AppRoutingModule } from './app.routing.module';
 import { SigninModule } from './signin/singin.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { BoardsModule } from './boards/boards.module';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -35,6 +36,7 @@ export function initializeAppFactory( appService: AppService ) {
 		AppRoutingModule, 
 		SigninModule,
 		DashboardModule,
+		BoardsModule,
 	],
 	providers: [
 		AppService,
