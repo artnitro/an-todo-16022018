@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SigninComponent } from './signin/signin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BoardsComponent } from './boards/boards.component';
 
 import { AuthGuard } from './auth/auth.guard';
 
@@ -18,7 +19,18 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'boards',
+        component: BoardsComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'boards',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: 'forgotpwd',
