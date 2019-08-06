@@ -105,3 +105,9 @@ a {
 .an-card-box {
   @include an-ca-box($an-padding-lg); 
 }
+
+// Horizontal toolbar.
+
+.an-toolbar-horizontal {
+  @include an-tb-horizontal($an-white-opacity-15);
+}

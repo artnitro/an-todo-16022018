@@ -1,0 +1,12 @@
+/**
+* Toolbar mixin.
+*/
+
+// Horizontal toolbar.
+
+@mixin an-tb-horizontal($color: $an-black-opacity-50) {
+  display: block;
+  background-color: $color;
+  width: 100%;
+  padding: $an-padding-md;
+}
