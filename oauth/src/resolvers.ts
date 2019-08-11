@@ -52,7 +52,7 @@ export class Resolvers {
           });
           return  Resolvers.token.getToken({
                     email: user.dataValues.email,
-                    firstName: user.dataValues.firstName
+                    firstName: user.dataValues.firstname
                   }, parseInt(process.env.TOKEN_LIFE, 10));
 
         } else {
@@ -130,7 +130,7 @@ export class Resolvers {
           });
           return  Resolvers.token.getToken({
                     email: user.dataValues.email,
-                    firstName: user.dataValues.firstName
+                    firstName: user.dataValues.firstname
                   }, parseInt(process.env.TOKEN_LIFE, 10)); 
         }
       })
