@@ -1,0 +1,11 @@
+/**
+* Box mixins.
+*/
+
+// Box.
+
+@mixin an-bx($color: $an-white-opacity-15, $padding: $an-padding-xs) {
+  background-color: $color;
+  padding: $padding;
+}
+
