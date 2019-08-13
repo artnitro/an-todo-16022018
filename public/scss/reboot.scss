@@ -17,6 +17,12 @@ html, body {
   font-weight: $an-font-weight-normal;
 }
 
+// Lists.
+
+ul {
+  list-style-type: none;
+}
+
 // Forms.
 
 label {
@@ -110,4 +116,18 @@ a {
 
 .an-toolbar-horizontal {
   @include an-tb-horizontal($an-white-opacity-15);
+}
+
+// Box.
+
+.an-box-icon {
+  @include an-bx($an-white-opacity-30, $an-padding-xs);
+  @include an-border-rounded();
+}
+
+.an-box-text {
+  @include an-bx($an-white-opacity-30, $an-padding-md);
+  @include an-border-rounded();
+  color: $an-white;
+  font-weight: $an-font-weight-bold;
 }
