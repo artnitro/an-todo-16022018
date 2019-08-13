@@ -2,17 +2,36 @@
  * Dashboard component.
  */
 
- import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
- @Component({
-   selector: 'dashboard',
-   templateUrl: './dashboard.html',
- })
+import { LOCAL } from '../app.config';
 
- export class DashboardComponent {
+const JWT = new JwtHelperService();
 
-  constructor() {
+@Component({
+  selector: 'dashboard',
+  templateUrl: './dashboard.html',
+})
+
+export class DashboardComponent implements OnInit {
+
+  token: string;
+  userData: object;
+  name: string; 
+  
+
+  constructor(
+    private LocalStorage: LocalStorageService,
+  ) {
     console.log('>>>>> Dashboard componente');
+    this.token = this.LocalStorage.retrieve(LOCAL.userData);
   }
 
- }
+  ngOnInit() {
+    this.userData = JWT.decodeToken(this.token);
+    this.name = this.userData['firstName'];
+    console.log('>>>> USER DATA: ', this.userData['firstName']);
+  }
+}
