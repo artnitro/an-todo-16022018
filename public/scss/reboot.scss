@@ -131,3 +131,7 @@ a {
   color: $an-white;
   font-weight: $an-font-weight-bold;
 }
+
+.an-box-img {
+  @include an-border-rounded();
+}
