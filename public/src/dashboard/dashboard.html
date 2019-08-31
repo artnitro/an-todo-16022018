@@ -16,14 +16,14 @@
         </div>
         <div class="col-sm-4 an-txt-right align-self-center an-pg-r-n">
           <ul class="an-margin-n an-padding-n">
-            <li class="an-d-inline-block an-box-text an-mg-r-sm">
-              <span class="">{{name | slice:0:1 | titlecase}}</span>
+            <li class="an-d-inline-block an-box-text an-mg-r-sm" *ngIf="userImage === '' else imagen">
+              <span>{{name | slice:0:1 | titlecase}}</span>
             </li>
             <li class="an-d-inline-block an-box-text an-mg-r-sm">
-              <span class="">{{name | titlecase}}</span>
+              <span>{{name | titlecase}}</span>
             </li>
             <li class="an-d-inline-block an-box-text an-mg-r-lg">
-              <span class="">En</span>
+              <span>En</span>
             </li>
             <li class="an-d-inline-block">
               <figure class="an-margin-n">
@@ -36,4 +36,11 @@
     </div>
   </nav>
 </an-toolbar-horizontal>
+<ng-template #imagen>
+  <li class="an-d-inline-block an-mg-r-sm">
+    <figure class="an-margin-n">
+      <img class="an-box-img" [src]="userImage" alt="settings">              
+    </figure>
+  </li>
+</ng-template>
 <router-outlet></router-outlet>
