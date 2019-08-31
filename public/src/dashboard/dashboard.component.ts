@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   token: string;
   userData: object;
+  userImage: string = '';
   name: string; 
   
 
@@ -32,6 +33,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.userData = JWT.decodeToken(this.token);
     this.name = this.userData['firstName'];
-    console.log('>>>> USER DATA: ', this.userData['firstName']);
+
+    // TODO: Los datos de la url de la imagen del usuario los tengo que tomar 
+    // de los datos cargados de la configuración del usuario. Tengo que ver
+    // como los almaceno y los cargo.
+
+    this.userImage = '../../img/arturo.jpg';
   }
 }
