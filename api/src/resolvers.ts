@@ -1,17 +1,20 @@
 /**
- * Resolvers for graphql.
+ * Resolvers for GraphQL
  */
 
-import { models } from './model/mysql';
+const books = [
+  {
+    title: 'Harry Potter and the Chamber of Secrets',
+    author: 'J.K. Rowling',
+  },
+  {
+    title: 'Jurassic Park',
+    author: 'Michael Crichton',
+  },
+];
 
-export class Resolvers {
-
-  static getUsers() {
-    return models.User
-      .findAll({})
-      .then( users => {
-        return users
-      });
-  }
-  
-}
+export const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
