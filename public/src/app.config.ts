@@ -9,6 +9,7 @@ export const COLORS = {
 
 export const SOURCE = {
   connectApi: 'https://api.antodo.local:3000/api/v1/',
+  connectApiSocket: 'wss://api.antodo.local:3000/api/v1/',
   connectOauth: 'https://oauth.antodo.local:5000/oauth/v1/'
 }
 
