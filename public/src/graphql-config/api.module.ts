@@ -9,6 +9,8 @@ import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
 
 import { LocalStorageService } from 'ngx-webstorage';
 
@@ -31,7 +33,6 @@ export class ApiModule {
     const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
       if (graphQLErrors) graphQLErrors.map(({ message, locations, path }) => console.log(`>>>[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),);
       if (networkError) console.log(`>>> [Network error]: ${networkError}`);
-
       return forward(operation); 
     });
 
@@ -54,10 +55,37 @@ export class ApiModule {
       withCredentials: true
     });
 
+    // Setup socket link.
+
+    const wss = new WebSocketLink({
+      uri: SOURCE.connectApiSocket,
+      options: {
+        reconnect: true, 
+        connectionParams: {
+          headers: { // Posiblemente no haga falta pasar autorización, la tengo ya en el link: authLink
+            'Authoritation': (() => { 
+              let token = this.LocalStorage.retrieve(LOCAL.userData)
+              return token ? `Bearer ${token}` : '';
+            })()
+          } 
+        }
+      }
+    });
+
+    // Setup link.
+
+    const link = ApolloLink.split( ({ query }) => {
+      let definition = getMainDefinition(query);
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+    },
+      wss,
+      ApolloLink.from([errorLink, authLink, http]),
+    );
+
     // Setup Apollo.
 
     apollo.create({
-      link: ApolloLink.from([errorLink, authLink, http]),
+      link,
       cache: new InMemoryCache()
     }, 'api');
 
