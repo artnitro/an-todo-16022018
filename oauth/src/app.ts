@@ -1,58 +1,13 @@
 /**
- * Bootstrapping app.
+ * App.
  */
 
 import * as http from 'http';
-import * as express from 'express';
-import * as cookieParser from 'cookie-parser';
 
+import { Bootstrap } from './bootstrap';
 import { models, sequelize } from './model/mysql';
-import { Router } from './router';
 
-/**
- * Defining our app.
- */
-
-class App {
-
-  app: express.Application;
-  router: express.Router = new Router().routes();
-
-  constructor() {
-    this.app = express();
-    this.initMiddleware()
-  }
-
-  private initMiddleware() {
-    this.app.use(cookieParser());
-    this.app.use(this.router);
-    this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction)  => {
-      (err.code === 'ENOENT')
-        ? res
-            .status(404)
-            .json({
-              error: '404 Not Found'
-            })
-        : (process.env.NODE_ENV === 'development')
-          ? res 
-              .status(500)
-              .json({
-                error: '500 Internal Server Error' + err
-              })
-          : res
-              .status(500)
-              .json({
-                error: '500 Internal Server Error'
-              });
-    }); 
-  }
-}
-
-/**
- * Defining our server.
- */
-
-const app: express.Application = new App().app;
+const app: any = new Bootstrap().app;
 const server: any = http.createServer(app);
 
 const onError = (err: any): void => {
