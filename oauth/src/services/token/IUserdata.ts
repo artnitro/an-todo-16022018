@@ -3,5 +3,5 @@
  */
 
 export interface IUserData {
-  [name: string]: string
+  [name: string]: string | boolean
 }
