@@ -5,7 +5,7 @@
 import { inject, injectable } from 'inversify';
 import * as bcrypt from 'bcryptjs';
 
-import { models } from './model/mysql'; // Remove when I removed the getUser() method.
+import { models } from './model/mysql'; // TODO: Remove when I removed the getUser() method.
 import { IUser } from './services/IUser';
 import { IToken } from './services/token/IToken';
 import { TYPES } from './services/types';
@@ -51,6 +51,7 @@ export class Resolvers {
             sameSite: 'strict'
           });
           return  Resolvers.token.getToken({
+                    isLogged: true,
                     email: user.dataValues.email,
                     firstName: user.dataValues.firstname
                   }, parseInt(process.env.TOKEN_LIFE, 10));
@@ -129,6 +130,7 @@ export class Resolvers {
             sameSite: 'strict'
           });
           return  Resolvers.token.getToken({
+                    isLogged: true,
                     email: user.dataValues.email,
                     firstName: user.dataValues.firstname
                   }, parseInt(process.env.TOKEN_LIFE, 10)); 
