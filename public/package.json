@@ -34,6 +34,7 @@
     "@angular/router": "^7.0.4",
     "@angular/upgrade": "^7.0.4",
     "@auth0/angular-jwt": "^2.1.0",
+    "@datorama/akita": "^4.10.9",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "apollo-angular": "^1.5.0",
