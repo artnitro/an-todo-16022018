@@ -2,9 +2,11 @@
 * Our root component.
 */
 
-import { Component, Renderer2, OnInit } from '@angular/core';
+import { Component, Renderer2, OnInit, NgZone } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'ngx-webstorage';
+
+import { akitaDevtools } from '@datorama/akita'; // Dev only.
 
 import { LOCAL } from './app.config';
 
@@ -18,10 +20,17 @@ export class AppComponent implements OnInit {
 	constructor( 
 		private renderer: Renderer2,
 		private translate: TranslateService,
-		private localStorage: LocalStorageService
+		private localStorage: LocalStorageService, 
+		private ngZone: NgZone // Dev only.
 	) {}
 
 	ngOnInit() {
+
+		// Development only
+
+		if (an_ENVIRONMENT !== 'production') {
+			akitaDevtools(this.ngZone);
+		}
 
 		// Setup background
 		
