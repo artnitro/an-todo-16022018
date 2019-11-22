@@ -13,6 +13,8 @@ import { InputModule } from '../components/input/input.module';
 import { SigninComponent } from './signin.component';
 import { SigninService } from './signin.service';
 
+import { SessionService } from '../stores/session/session.service';
+
 @NgModule({
   imports: [
     RouterModule, 
@@ -22,7 +24,10 @@ import { SigninService } from './signin.service';
     MessageModule,
     InputModule,
   ],
-  providers: [SigninService],
+  providers: [
+    SigninService,
+    SessionService
+  ],
   declarations: [SigninComponent],
   exports: [SigninComponent]
 })
