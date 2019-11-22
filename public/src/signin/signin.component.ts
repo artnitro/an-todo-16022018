@@ -7,15 +7,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { SigninService } from './signin.service';
-
-const JWT = new JwtHelperService();
+import { SessionService } from '../stores/session/session.service';
+import { SessionQuery } from '../stores/session/session.query';
 
 @Component({
   selector: 'signin',
@@ -25,42 +23,40 @@ const JWT = new JwtHelperService();
 export class SigninComponent extends AFields implements OnInit, OnDestroy {
   
   signinForm: FormGroup;
-
-  subscription: Subscription;
+  
+  private subsc: Subscription = new Subscription();
   hasError: object = {};
   formColor: string;
   formMessage: string; 
   formMessageColor: string;
-  token: string;
   
   constructor(
     private fb: FormBuilder, 
     private signinService: SigninService,
-    private LocalStorage: LocalStorageService, 
     public translate: TranslateService,
     private router: Router,
+    private sessionService: SessionService,
+    private sessionQuery: SessionQuery
   ) {
     super(); 
     console.info('>>>>> Signin component.');
-    this.token = this.LocalStorage.retrieve(LOCAL.userData);
   }
 
   ngOnInit() {
-    if ( this.token !== null && !JWT.isTokenExpired(this.token) ) {
-      this.router.navigate(['/dashboard']);
-    }
+    this.subsc.add(this.sessionQuery.isLogged$.subscribe( isLogged => {
+      if ( isLogged ) this.router.navigate(['/dashboard']);
+    }));
     this.signinForm = this.fb.group({
       email: this.email(),
       password: this.password()
     });
-    this.translate.get('SIGNIN.STATUS1').subscribe((res: string) => {
+    this.subsc.add(this.translate.get('SIGNIN.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
-    });
-
+    }));
   }
 
   sendData() {
-    this.subscription = this.signinService 
+    this.subsc.add(this.signinService 
       .isUser$({
         email: this.signinForm.value.email, 
         password: this.signinForm.value.password
@@ -82,21 +78,20 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
                   )
             })
         }
-      );
+      ));
   }
 
   saveToken(token: string) {
-    console.log ('>>> Saving token.');
-    this.LocalStorage.store(LOCAL.userData, token);
+    this.sessionService.updateToken(token);
     this.router.navigate(['/dashboard']);
   }
 
   typingData(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
+    this.subsc.add(this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
       this.formColor = colors;
-    });
+    }));
   }
 
   signin() {
@@ -111,7 +106,7 @@ export class SigninComponent extends AFields implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
+    this.subsc.unsubscribe();
   }
 
 }
