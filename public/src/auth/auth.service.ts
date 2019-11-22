@@ -3,28 +3,29 @@
  */
 
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subscription } from 'rxjs';
 
-import { LOCAL } from '../app.config';
-
-const JWT = new JwtHelperService();
+import { SessionQuery } from '../stores/session/session.query';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private token: string;
+  subscription: Subscription;
 
   constructor(
-    private LocalStorage: LocalStorageService
+    private sessionQuery: SessionQuery,
   ) {}
 
   isUser(): boolean {
-    this.token = this.LocalStorage.retrieve(LOCAL.userData);
-    return (this.token === null || JWT.isTokenExpired(this.token)) ? false : true;
-  }
+    let logged: boolean;
 
+    this.subscription = this.sessionQuery.isLogged$.subscribe( isLogged => {
+      logged = isLogged;
+    })
+
+    return logged;
+  }
 
 }
