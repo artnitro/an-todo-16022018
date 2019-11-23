@@ -3,7 +3,7 @@
  */
 
 export interface SessionState {
-  isLogged: boolean,
+  isLogged: boolean;
   email: string;
   firstName: string;
 }
