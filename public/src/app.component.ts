@@ -2,12 +2,13 @@
 * Our root component.
 */
 
-import { Component, Renderer2, OnInit, NgZone } from '@angular/core';
+import { Component, Renderer2, OnInit, OnDestroy , NgZone } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from 'ngx-webstorage';
+import { Subscription } from 'rxjs';
 
 import { akitaDevtools } from '@datorama/akita'; // Dev only.
 
+import { LanguageQuery } from './stores/language/language.query';
 import { LOCAL } from './app.config';
 
 @Component({
@@ -15,12 +16,14 @@ import { LOCAL } from './app.config';
 	template: '<router-outlet></router-outlet>'
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+
+	private subscription: Subscription = new Subscription();
 
 	constructor( 
 		private renderer: Renderer2,
 		private translate: TranslateService,
-		private localStorage: LocalStorageService, 
+		private languageQuery: LanguageQuery, 
 		private ngZone: NgZone // Dev only.
 	) {}
 
@@ -39,6 +42,13 @@ export class AppComponent implements OnInit {
 
 		// Setup language
 
-		this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
+		this.subscription.add(this.languageQuery.language$.subscribe( (language: string) => {
+			this.translate.setDefaultLang(language);
+		}));
+
+	}
+
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
 	}
 }
