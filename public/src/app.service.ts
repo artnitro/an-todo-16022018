@@ -3,10 +3,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
 
-import { LOCAL, LANGUAGE } from './app.config';
 import { SessionService } from './stores/session/session.service';
+import { LanguageService } from './stores/language/language.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +13,13 @@ import { SessionService } from './stores/session/session.service';
 export class AppService {
 
   constructor(
-    private localStorage: LocalStorageService,
     private sessionService: SessionService,
+    private languageService: LanguageService,
   ) {}
 
   init() {
-    return new Promise<any> ( (resolve, reject) => {  
-      if ( this.localStorage.retrieve(LOCAL.language) === null ) {
-        this.localStorage.store(LOCAL.language, LANGUAGE.defaultLanguage );
-      }
+    return new Promise<any> ( (resolve, reject) => {
+      this.languageService.login();
       this.sessionService.login();
       resolve();
     });
