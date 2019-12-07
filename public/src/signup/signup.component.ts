@@ -7,13 +7,14 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { SignupService } from './signup.service';
+import { LanguageQuery } from '../stores/language/language.query';
+import { SessionService } from '../stores/session/session.service';
 
 @Component({
   selector: 'signup',
@@ -24,7 +25,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
 
   signupForm: FormGroup;
 
-  subscription: Subscription;
+  private subscription: Subscription = new Subscription();
   hasError: object = {};
   formColor: string;
   formMessage: string;
@@ -33,13 +34,16 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private signupService: SignupService,
-    private localStorage: LocalStorageService,
     private translate: TranslateService ,
     private router: Router,
+    private languageQuery: LanguageQuery,
+    private sessionService: SessionService,
   ) {
     super();
     console.info('>>>>> Signup component.');
-    this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
+    this.subscription.add(this.languageQuery.language$.subscribe( (language: string) => {
+			this.translate.setDefaultLang(language);
+		}));
   }
 
   ngOnInit() {
@@ -52,13 +56,13 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     });
-    this.translate.get('SIGNUP.STATUS1').subscribe((res: string) => {
+    this.subscription.add(this.translate.get('SIGNUP.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
-    });
+    }));
   }
 
   sendData() {
-    this.subscription = this.signupService
+    this.subscription.add(this.signupService
       .createUser$({
         firstname: this.signupForm.value.firstName,
         lastname: this.signupForm.value.lastName,
@@ -84,21 +88,20 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
                       );
             })
         }
-      );
+      ));
   }
 
   saveToken(token: string) {
-    console.log('>>> Saving token');
-    this.localStorage.store(LOCAL.userData, token);
+    this.sessionService.updateToken(token);
     this.router.navigate(['/dashboard']);
   }
 
   typingData(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
+    this.subscription.add(this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
       this.formColor = colors;
-    });
+    }));
   }
 
   signup() {
@@ -113,7 +116,7 @@ export class SignupComponent extends AFields implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
