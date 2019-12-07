@@ -15,6 +15,7 @@ import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ConfirmPasswordValidator } from '../services/form/validators/confirmpassword.validator';
 import { ChangepwdService } from './changepwd.service';
+import { LanguageQuery } from '../stores/language/language.query';
 
 const JWT = new JwtHelperService();
 
@@ -27,7 +28,7 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
 
   changepwdForm: FormGroup;
 
-  subscription: Subscription;
+  private subscription: Subscription = new Subscription;
   token: string;
   decodedToken: object;
   hasError: object = {};
@@ -41,11 +42,14 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
     private changepwdService: ChangepwdService,
     private router: Router,
     private localStorage: LocalStorageService,
-    private translate: TranslateService
+    private translate: TranslateService, 
+    private languageQuery: LanguageQuery,
   ) {
     super();
     console.info('>>>>> Changepwd component.');
-    this.translate.setDefaultLang(this.localStorage.retrieve(LOCAL.language));
+    this.subscription.add(this.languageQuery.language$.subscribe( (language: string) => {
+			this.translate.setDefaultLang(language);
+		}));
     this.token = this.localStorage.retrieve(LOCAL.forgotPwd);
   }
 
@@ -59,9 +63,9 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
     }, {
       validator: ConfirmPasswordValidator.MatchPassword
     });
-    this.translate.get('CHANGEPWD.STATUS1').subscribe((res: string) => {
+    this.subscription.add(this.translate.get('CHANGEPWD.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
-    });
+    }));
   }
 
   changepwd() {
@@ -76,7 +80,7 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
   }
 
   sendData() {
-    this.subscription = this.changepwdService
+    this.subscription.add(this.changepwdService
       .changePwd$({
         email: this.decodedToken['email'],
         password: this.changepwdForm.value.password
@@ -101,15 +105,15 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
                 )
           })
         }
-      )
+      ));
   }
 
   typingData(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
+    this.subscription.add(this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
       this.formColor = colors;
-    });
+    }));
   }
 
   changeContinue() {
@@ -117,7 +121,7 @@ export class ChangepwdComponent extends AFields implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
