@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { COLORS, LOCAL } from '../app.config';
 import { AFields } from '../services/form/AFields';
 import { ForgotpwdService } from './forgotpwd.service';
+import { LanguageQuery } from '../stores/language/language.query';
 
 @Component({
   selector: 'forgotpwd',
@@ -23,7 +24,7 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
 
   forgotpwdForm: FormGroup;
 
-  subscription: Subscription;
+  private subscription: Subscription = new Subscription();
   hasError: object = {};
   show: boolean = true;
   
@@ -37,23 +38,26 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
     private forgotpwdService: ForgotpwdService,
     private LocalStorage: LocalStorageService,
     private router: Router,
+    private languageQuery: LanguageQuery,
   ) {
     super();
     console.info('>>>>> Forgotpwd component.');
-    this.translate.setDefaultLang(this.LocalStorage.retrieve(LOCAL.language));
+    this.subscription.add(this.languageQuery.language$.subscribe( (language: string) => {
+			this.translate.setDefaultLang(language);
+		}));
   }
 
   ngOnInit() {
     this.forgotpwdForm = this.fb.group({
       email: this.email(),
     });
-    this.translate.get('FORGOTPWD.STATUS1').subscribe((res: string) => {
+    this.subscription.add(this.translate.get('FORGOTPWD.STATUS1').subscribe((res: string) => {
       this.formMessage = res;
-    });
+    }));
   }
 
   sendData() {
-    this.subscription = this.forgotpwdService
+    this.subscription.add(this.forgotpwdService
       .forgotpwd$({
         email: this.forgotpwdForm.value.email
       })
@@ -74,8 +78,7 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
                   )
             })
         }
-
-      );
+      ));
   }
 
   saveToken(token: string) {
@@ -84,11 +87,11 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
   }
 
   typingData(colors: string, text: string) {
-    this.translate.get(text).subscribe((res: string) => {
+    this.subscription.add(this.translate.get(text).subscribe((res: string) => {
       this.formMessage = res;
       this.formMessageColor = colors;
       this.formColor = colors;
-    });
+    }));
   }
 
   forgotPwd() {
@@ -107,7 +110,7 @@ export class ForgotpwdComponent extends AFields implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if ( typeof this.subscription !== 'undefined' ) this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
