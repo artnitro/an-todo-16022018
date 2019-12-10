@@ -18,10 +18,9 @@ export class AppService {
   ) {}
 
   init() {
-    return new Promise<any> ( (resolve, reject) => {
-      this.languageService.login();
-      this.sessionService.login();
-      resolve();
-    });
+    return Promise.all([
+      this.languageService.login(), 
+      this.sessionService.login()
+    ]);
   }
 }
