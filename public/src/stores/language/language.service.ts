@@ -27,7 +27,7 @@ export class LanguageService {
     this.languageStore.update({ language });
   }
 
-  login(): boolean {
+  async login(): Promise<boolean> {
     let lang: string = this.LocalStorage.retrieve(LOCAL.language)
     return ( lang !== null )
       ? (

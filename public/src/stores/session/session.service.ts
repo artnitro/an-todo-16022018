@@ -29,7 +29,7 @@ export class SessionService {
     this.sessionStore.update({ isLogged, email, firstName });  
   }
 
-  login(): boolean {
+  async login(): Promise<boolean> {
     let token: string = this.LocalStorage.retrieve(LOCAL.userData);
     return ( token !== null && !JWT.isTokenExpired(token) )
       ? (
