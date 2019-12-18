@@ -20,6 +20,10 @@ export const LOCAL = {
 }
 
 export const LANGUAGE = {
-  defaultLanguage: 'en'
+  defaultLanguage: 'en',
+  languages: [
+    'English',
+    'Spanish'
+  ]
 }
 
