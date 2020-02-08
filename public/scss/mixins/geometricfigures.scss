@@ -1,0 +1,15 @@
+/**
+* Geometric figures.
+*/
+
+// Triangle.
+
+@mixin an-trg($size, $style, $color) {
+  border: $size $style $color;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: $color;
+  width: 0px;
+  height: 0px;
+}
