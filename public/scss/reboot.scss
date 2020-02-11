@@ -121,17 +121,39 @@ a {
 // Box.
 
 .an-box-icon {
-  @include an-bx($an-white-opacity-30, $an-padding-xs);
+  @include an-bx($an-white-opacity-30, $an-padding-sm);
   @include an-border-rounded();
 }
 
 .an-box-text {
-  @include an-bx($an-white-opacity-30, $an-padding-md);
+  @include an-bx($an-white-opacity-30, $an-padding-sm);
   @include an-border-rounded();
   color: $an-white;
   font-weight: $an-font-weight-bold;
+  font-size: $an-font-size-xs;
 }
 
 .an-box-img {
   @include an-border-rounded();
+}
+
+// Menu
+
+.an-triangle {
+  @include an-trg(5px, solid, $an-white-opacity-30);
+}
+
+.an-menu-position {
+  position: absolute !important;
+  z-index: $an-index-menu;
+  top: 0%;
+  left: 0%;
+}
+
+.an-menu-position > ul {
+  @include an-bx($an-white-opacity-30, $an-padding-sm);
+  @include an-border-rounded();
+  color: $an-white;
+  font-weight: $an-font-weight-bold;
+  font-size: $an-font-size-xs;
 }
