@@ -22,8 +22,16 @@ export const LOCAL = {
 export const LANGUAGE = {
   defaultLanguage: 'en',
   languages: [
-    'English',
-    'Spanish'
+    {
+      id: 1,
+      code: 'en',
+      language: 'english'
+    },
+    {
+      id: 2,
+      code: 'es',
+      language: 'spanish'
+    }
   ]
 }
 
