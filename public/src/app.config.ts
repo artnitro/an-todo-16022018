@@ -20,18 +20,22 @@ export const LOCAL = {
 }
 
 export const LANGUAGE = {
-  defaultLanguage: 'en',
+  defaultLanguage: 'en'
+}
+
+// Drop down menus.
+
+export const MENU = {
   languages: [
     {
       id: 1,
-      code: 'en',
-      language: 'english'
+      item: 'english',
+      data: 'en'
     },
     {
       id: 2,
-      code: 'es',
-      language: 'spanish'
+      item: 'español',
+      data: 'es'
     }
   ]
 }
-
