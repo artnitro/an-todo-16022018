@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { akitaDevtools } from '@datorama/akita'; // Dev only.
 
 import { LanguageQuery } from './stores/language/language.query';
-import { LOCAL } from './app.config';
+import { LOCAL, MENU } from './app.config';
 
 @Component({
 	selector: 'an-todo-root',
@@ -42,8 +42,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 		// Setup language
 
+		MENU.languages.filter(language => this.translate.addLangs([language.data]));
+
 		this.subscription.add(this.languageQuery.language$.subscribe( (language: string) => {
 			this.translate.setDefaultLang(language);
+			this.translate.use(language);
 		}));
 
 	}
