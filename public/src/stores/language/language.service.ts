@@ -42,9 +42,9 @@ export class LanguageService {
   }
 
   updateLanguage(lang: string): void {
-    this.setLanguage({ language: lang});
+    this.setLanguage({ language: lang });
     this.LocalStorage.store(LOCAL.language, lang);
-    this.translate.setDefaultLang(lang);
+    this.translate.use(lang);
   }
 
 }
