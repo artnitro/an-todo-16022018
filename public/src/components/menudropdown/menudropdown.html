@@ -1,0 +1,11 @@
+<!-- 
+  an-menu-dropdown template.
+ -->
+<div class="an-menu-position an-triangle" #pointer></div>
+<div class="an-menu-position" #dropdown>
+  <ul class="an-margin-n an-padding-n">
+    <li class="an-pg-t-xs an-pg-b-xs an-cursor-hand" *ngFor="let data of menuData; trackBy: trackElement" (click)="onClick(data)">
+      {{data.item | titlecase}}
+    </li>
+  </ul>
+</div>
