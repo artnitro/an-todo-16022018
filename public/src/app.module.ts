@@ -16,6 +16,9 @@ import { BoardsModule } from './boards/boards.module';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
+import  { httpInterceptors } from './interceptors/index.interceptor';
+
+import { LoaderService } from './stores/loader/loader.service';
 
 export function initializeAppFactory( appService: AppService ) {
 	return (): Promise<any> => {
@@ -40,7 +43,9 @@ export function initializeAppFactory( appService: AppService ) {
 	],
 	providers: [
 		AppService,
-		{ provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AppService], multi: true }
+		{ provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AppService], multi: true },
+		httpInterceptors,
+		LoaderService,
 	],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
