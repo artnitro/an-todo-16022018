@@ -1,7 +1,7 @@
 /**
  * an-menu-dropdown component.
  * 
- * 
+ * <an-menu-dropdown [position]="position" [menuData]="menuData" *ngIf="condition"></an-menu-dropdown>
  */
 
 import { Component, Input, ElementRef, Renderer2, AfterViewInit, ViewChild} from '@angular/core';
