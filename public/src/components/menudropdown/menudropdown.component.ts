@@ -1,7 +1,7 @@
 /**
  * an-menu-dropdown component.
  * 
- * <an-menu-dropdown [position]="position" [menuData]="menuData" *ngIf="condition"></an-menu-dropdown>
+ * <an-menu-dropdown [position]="position" [menuData]="menuData" [eventName]="eventNameEmitted" *ngIf="condition"></an-menu-dropdown>
  */
 
 import { Component, Input, ElementRef, Renderer2, AfterViewInit, ViewChild} from '@angular/core';
@@ -19,7 +19,8 @@ export class MenudropdownComponent implements AfterViewInit {
   @ViewChild('dropdown') private dropdownElement: ElementRef;
 
   @Input() position: any;
-  @Input() menuData:any;
+  @Input() menuData: any;
+  @Input() eventName: string;
 
   constructor(
     private renderer: Renderer2,
@@ -53,7 +54,7 @@ export class MenudropdownComponent implements AfterViewInit {
   }
 
   onClick(data) {
-    this.eventEmitter.emit('LanguageChange', data);
+    this.eventEmitter.emit(this.eventName, data);
   }
 
   trackElement(index: number, data: any) {
