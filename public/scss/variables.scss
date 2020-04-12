@@ -139,8 +139,16 @@ $an-border-width: 1px !default;
 $an-border-style: solid !default;
 $an-border-color: transparent !default;
 
+// Position.
+
+$an-position-absolute: absolute !important;
+
 // Z index.
 
 // Menus.
 
 $an-index-menu: 10 !default;
+
+// loader.
+
+$an-index-loader: 100 !default; 
