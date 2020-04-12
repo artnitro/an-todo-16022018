@@ -1,0 +1,17 @@
+/**
+* Loader mixins
+*/
+
+// Loader bar.
+
+@mixin an-ld-bar($top: 0%, $left: 0%, $heigth: 5px, $width: 0%, $bgColor: $an-red) {
+  display: $an-display-block;
+  position: $an-position-absolute;
+  z-index: $an-index-loader;
+  top: $top;
+  left: $left;
+  height: $heigth;
+  width: $width;
+  background-color: $bgColor;
+}
+
