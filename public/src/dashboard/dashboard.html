@@ -7,7 +7,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4 an-txt-left an-pg-l-n">
-          <span></span>
+          <ul class="an-margin-n an-padding-n">
+            <li class="an-d-inline-block an-box-text an-mg-r-sm" *ngIf="userImage === '' else imagen">
+              <span>{{name | slice:0:1 | titlecase}}</span>
+            </li>
+            <li class="an-d-inline-block an-box-text an-mg-r-sm">
+              <span>{{name | titlecase}}</span>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-4 an-txt-center">
           <figure class="an-margin-n">
@@ -16,14 +23,8 @@
         </div>
         <div class="col-sm-4 an-txt-right align-self-center an-pg-r-n">
           <ul class="an-margin-n an-padding-n">
-            <li class="an-d-inline-block an-box-text an-mg-r-sm" *ngIf="userImage === '' else imagen">
-              <span>{{name | slice:0:1 | titlecase}}</span>
-            </li>
-            <li class="an-d-inline-block an-box-text an-mg-r-sm">
-              <span>{{name | titlecase}}</span>
-            </li>
-            <li class="an-d-inline-block an-box-text an-mg-r-lg">
-              <span>En</span>
+            <li class="an-d-inline-block an-box-text an-mg-r-sm an-cursor-hand" an-menu #languageMenu="an-menu">
+              <span>{{usedLanguage | uppercase}}</span>
             </li>
             <li class="an-d-inline-block">
               <figure class="an-margin-n">
@@ -36,6 +37,8 @@
     </div>
   </nav>
 </an-toolbar-horizontal>
+<an-menu-dropdown [position]="languageMenu.elPosition" [menuData]="languageMenuData" [eventName]="eventNameEmitted" *ngIf="languageMenu.toggled"></an-menu-dropdown>
+<an-loader *ngIf="loaded"></an-loader>
 <ng-template #imagen>
   <li class="an-d-inline-block an-mg-r-sm">
     <figure class="an-margin-n">
