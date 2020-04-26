@@ -31,8 +31,9 @@ const server = new ApolloServer({
   context: ({ req, connection }) => {
     try {
       // TODO: Verificar connection cuando tenga subscriptions, ya que se gestiona el contexto a través de connection con subscription.
-      const token = ( req.headers.authoritation as string ).substring( req.headers.authoritation.indexOf(' ') + 1, req.headers.authoritation.length );
-      const user = jwt.verify(token, process.env.JWT_SECRET);
+      let token = req.headers.authorization.toString().replace('Bearer ', '') || '';
+      let user = jwt.verify(token, process.env.JWT_SECRET);
+      // console.log('>>>>> USER: ', user);
       return { user };
     } catch (error) {
       console.log('>>> Error: ', error);
