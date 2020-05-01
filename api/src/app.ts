@@ -4,12 +4,17 @@
 
 import 'reflect-metadata';
 import express from 'express';
+import mongoose from 'mongoose';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import http from 'http';
 import jwt from 'jsonwebtoken';
 
 import { typeDefs } from './typedefs';
 import { resolvers } from './resolvers';
+
+import { mongo } from './mongo.config';
+
+// Server config.
 
 const app: express.Application = express();
 const httpServer = http.createServer(app);
@@ -45,7 +50,17 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, path: '/api/v1/' });
 server.installSubscriptionHandlers(httpServer);
 
-httpServer.listen({ port: process.env.PORT }, () => {
-  console.log(`>>> Server says: Bootstraping server, listening port: ${process.env.PORT}`);
-  console.log(`>>> Server says: Subscriptions ready, listening port: ${process.env.PORT}`);
-});
+// Connect MongoDB and server bootstrap.
+
+mongo().then(
+  () => {
+    console.log('>>>> Mongo connected');
+    httpServer.listen({ port: process.env.PORT }, () => {
+      console.log(`>>> Server says: Bootstraping server, listening port: ${process.env.PORT}`);
+      console.log(`>>> Server says: Subscriptions ready, listening port: ${process.env.PORT}`);
+    });
+  },
+  (err) => {
+    console.log('>>> Error MongoDB: ', err);
+  }
+)
