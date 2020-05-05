@@ -4,7 +4,6 @@
 
 import 'reflect-metadata';
 import express from 'express';
-import mongoose from 'mongoose';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import http from 'http';
 import jwt from 'jsonwebtoken';
@@ -12,7 +11,7 @@ import jwt from 'jsonwebtoken';
 import { typeDefs } from './typedefs';
 import { resolvers } from './resolvers';
 
-import { mongo } from './mongo.config';
+import { MongoService } from './mongo/mongo.service';
 
 // Server config.
 
@@ -52,7 +51,7 @@ server.installSubscriptionHandlers(httpServer);
 
 // Connect MongoDB and server bootstrap.
 
-mongo().then(
+MongoService.connect().then(
   () => {
     console.log('>>>> Mongo connected');
     httpServer.listen({ port: process.env.PORT }, () => {
