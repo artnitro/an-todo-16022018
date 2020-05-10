@@ -8,7 +8,7 @@ import { URI, OPTIONS } from './mongo.config';
 
 export class MongoService {
 
-  static async connect() {
+  static async connect(): Promise<any> {
 
     await  mongoose.connect(URI, OPTIONS);
 
