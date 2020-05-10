@@ -1,4 +1,4 @@
-FROM node:8.9.4-alpine
+FROM node:12-alpine
 
 LABEL org.label-schema.build-date="2018-04-20T16:58:20Z"
 LABEL org.label-schema.name = "an-todo-16022018 api"
