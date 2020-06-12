@@ -34,10 +34,12 @@ export class SessionService {
     return ( token !== null && !JWT.isTokenExpired(token) )
       ? (
           this.setSession(JWT.decodeToken(token)),
+          console.log('>>> Authorized user.'),
           true
       )
       : ( 
           this.setSession({ isLogged: false, email: null, firstName: null }),
+          console.log('>>> Unauthorized user.'),
           false
       )
   }
