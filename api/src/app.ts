@@ -2,14 +2,17 @@
  * Bootstrapping app.
  */
 
-import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import http from 'http';
 import jwt from 'jsonwebtoken';
 
-import { typeDefs } from './typedefs';
-import { resolvers } from './resolvers';
+import 'reflect-metadata';
+
+import { rootTypeDefs } from './graphql/root.typedefs';
+import { queryTypeDefs } from './graphql/query/query.typedefs'
+
+import { resolvers } from './graphql/resolvers';
 
 import { MongoService } from './mongo/mongo.service';
 
@@ -19,7 +22,7 @@ const app: express.Application = express();
 const httpServer = http.createServer(app);
 
 const server = new ApolloServer({ 
-  typeDefs, 
+  typeDefs: [rootTypeDefs, queryTypeDefs], 
   resolvers,
   subscriptions: {
     path: '/api/v1/', 
@@ -35,7 +38,8 @@ const server = new ApolloServer({
   context: ({ req, connection }) => {
     try {
       // TODO: Verificar connection cuando tenga subscriptions, ya que se gestiona el contexto a través de connection con subscription.
-      let token = req.headers.authorization.toString().replace('Bearer ', '') || '';
+      // let token = req.headers.authorization.toString().replace('Bearer ', '') || '';
+      let token = (req.headers.authorization) ? req.headers.authorization.toString().replace('Bearer ', '') : '';
       let user = jwt.verify(token, process.env.JWT_SECRET);
       // console.log('>>>>> USER: ', user);
       return { user };
