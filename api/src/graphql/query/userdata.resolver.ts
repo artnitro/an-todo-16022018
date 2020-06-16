@@ -13,9 +13,7 @@ UserData.userData = (parent, args, context, info) => {
   let user: object;
   
   return User.findAll()
-    .then( (data) => {
-      return [ user ] = data;
-    })
+    .then( (data) => [ user ] = data)
     .catch( err => {
       console.log('>>> Error;', err);
       throw new ApolloError('Internal Server Error', '501');
