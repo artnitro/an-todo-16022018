@@ -25,6 +25,7 @@
     "url": "https://github.com/artnitro/an-todo-16022018.git"
   },
   "dependencies": {
+    "@typegoose/auto-increment": "^0.4.1",
     "@typegoose/typegoose": "^7.0.0",
     "apollo-server": "^2.13.0",
     "graphql": "^14.1.1",
