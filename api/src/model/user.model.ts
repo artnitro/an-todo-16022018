@@ -13,7 +13,10 @@ class User extends defaultClasses.FindOrCreate {
   public email!: string;
 
   @prop({ default: [], type: String })
-  public project: string[]; 
+  public personals: string[];
+
+  @prop({ default: [], type: String })
+  public groups: string[];
 
 }
 
