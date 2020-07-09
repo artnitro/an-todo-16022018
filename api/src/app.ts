@@ -10,7 +10,8 @@ import jwt from 'jsonwebtoken';
 import 'reflect-metadata';
 
 import { rootTypeDefs } from './graphql/root.typedefs';
-import { queryTypeDefs } from './graphql/query/query.typedefs'
+import { queryTypeDefs } from './graphql/query/query.typedefs';
+import { mutationTypeDefs } from './graphql/mutation/mutation.typedefs';
 
 import { resolvers } from './graphql/resolvers';
 
@@ -22,7 +23,7 @@ const app: express.Application = express();
 const httpServer = http.createServer(app);
 
 const server = new ApolloServer({ 
-  typeDefs: [rootTypeDefs, queryTypeDefs], 
+  typeDefs: [rootTypeDefs, queryTypeDefs, mutationTypeDefs], 
   resolvers,
   subscriptions: {
     path: '/api/v1/', 
