@@ -9,6 +9,7 @@ import { UserModel } from '../../model/user.model'
 type IUser = {
   findAll(): Promise<any>,
   findOne(args: object): Promise<any>,
+  updatePersonal(project: string, type: string, mail: object): Promise<any>,
 }
 
 export const User: IUser = Object.create(Object.prototype);
@@ -25,4 +26,21 @@ User.findAll = async () => await UserModel.find();
  * @returns Promise
  */
 User.findOne = async (args) => await UserModel.findOrCreate( args );
-  
+
+/**
+ * 
+ */
+User.updatePersonal = async (project, type, mail) => {
+
+  return await UserModel.updateOne(
+    mail,
+    {
+      $push: {
+        [type]: {
+          $each : [project]
+        }
+      }
+    }
+  );
+
+} 
