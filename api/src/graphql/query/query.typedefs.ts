@@ -9,14 +9,16 @@ export const queryTypeDefs = gql`
   # Types for userProjects.
 
   type projectData {
-    project: [String]
+    personals: [String]
+    groups: [String]
   }
 
   # Types for userData.
 
   type user {
     email: String
-    project: [String]
+    personals: [String]
+    groups: [String]
   }
 
   # Queries.
@@ -24,6 +26,7 @@ export const queryTypeDefs = gql`
   type Query {
     userProjects: projectData
     userData: [user]
+    getCollections: [String]
   }
 
 `;
