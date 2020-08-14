@@ -8,6 +8,7 @@ import { User } from '../services/user.service';
 
 
 export const UserProjects = Object.create(Object.prototype);
+
 UserProjects.userProjects = (parent, args, context, info) => {
 
   let
@@ -15,10 +16,14 @@ UserProjects.userProjects = (parent, args, context, info) => {
     mail = ({ email } = context.user, { email });
 
   return User.findOne(mail)
-    .then( (projects) => ({project: projects.doc.project}) )
+    .then( (projects) => ({
+      personals: projects.doc.personals,
+      groups: projects.doc.groups
+
+    }))
     .catch( err => {
       console.log('>>> ERROR:', err);
-      throw new ApolloError('Internal Server Error', '501');
+      throw new ApolloError('Internal Server Error', '500');
     })
 
 }
